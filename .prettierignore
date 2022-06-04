@@ -1,0 +1,14 @@
+.next
+node_modules
+public
+.gitignore
+.prettierrc.json
+next-env.d.ts
+next.config.js
+package-lock.json
+package.json
+postcss.config.js
+README.md 
+tailwind.config.js
+tsconfig.json
+yarn.lock
