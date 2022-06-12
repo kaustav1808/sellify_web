@@ -57,7 +57,6 @@ const signInModal: ReactElement = (
         >
           ✕
         </label>
-        
       </div>
     </div>
   );
