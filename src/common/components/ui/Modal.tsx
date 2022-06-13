@@ -4,7 +4,7 @@ import { ReactElement } from 'react';
 type ModalType = {
   show: Boolean;
   resetModal: Function;
-  children: ReactElement
+  children: ReactElement;
 };
 
 const Modal: NextPage = (props: ModalType) => {
