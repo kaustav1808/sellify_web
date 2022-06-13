@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { ReactElement, useState } from 'react';
-import SignIn from './SignIn';
+import Auth from './Auth';
 
 const profile: ReactElement = (handler: Function) => {
   return (
@@ -81,7 +81,7 @@ const Navbar: NextPage = () => {
           </div>
           {authenticated ? profile(setAuthenticated) : signIn(setSignInModal)}
         </div>
-        <SignIn value={showSignInModal} reset={setSignInModal} />
+        <Auth show={showSignInModal} reset={setSignInModal} />
       </>
     </div>
   );
