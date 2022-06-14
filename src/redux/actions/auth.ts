@@ -6,7 +6,7 @@ export const signUp =
   (payload = {}) =>
   (dispatch: any) => {
     client.post('/auth/signup', payload).then((res) => {
-      postAuth(res.data.newtoken)
+      postAuth(res.data.newtoken);
       dispatch({
         type: t.SIGN_UP,
         payload: res.data.user,
