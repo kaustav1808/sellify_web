@@ -1,18 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
-import { applyMiddleware } from 'redux';
+import { applyMiddleware, compose } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
-const middleware = [thunk];
-
-export const store = configureStore(
+export const store = (initialstate:any) => configureStore(
   { reducer: rootReducer },
-  {},
-  composeWithDevTools(applyMiddleware(...middleware)),
+  composeWithDevTools(applyMiddleware([thunk])),
 );
 
-const makeStore = () => store;
 
-export const wrapper = createWrapper(makeStore);
+export const wrapper = createWrapper(store);

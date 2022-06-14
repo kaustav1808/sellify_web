@@ -4,6 +4,7 @@
     "paths": {
       "@components/*" : ["./src/common/components/*"],
       "@styles/*" : ["./src/common/styles/*"],
+      "@store/*" : ["./src/redux/*"],
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
