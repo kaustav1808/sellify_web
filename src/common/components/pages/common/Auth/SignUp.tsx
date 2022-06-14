@@ -71,7 +71,7 @@ const SignUp: NextPage = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => {
-  return { user: state.auth.user };
+  return { user: state.user };
 };
 
 const mapDispatchToProps = {
