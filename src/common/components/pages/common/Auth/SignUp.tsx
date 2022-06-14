@@ -1,16 +1,15 @@
 import { NextPage } from 'next';
 import { connect } from 'react-redux';
-import {signUp} from '@store/actions/auth';
+import { signUp } from '@store/actions/auth';
 import { useState } from 'react';
 
-
 const SignUp: NextPage = (props: any) => {
-  const [user, setUser] = useState({email:'', username:'', password:''})
+  const [user, setUser] = useState({ email: '', username: '', password: '' });
 
-  const updateUser = (e)=> {
-    let key = e.target.id
-    setUser({...user,[key]: e.target.value})
-  }
+  const updateUser = (e) => {
+    let key = e.target.id;
+    setUser({ ...user, [key]: e.target.value });
+  };
 
   return (
     <div className="hero-content">
@@ -59,7 +58,7 @@ const SignUp: NextPage = (props: any) => {
             <button
               className="btn btn-primary"
               onClick={() => {
-                props.signUp(user)
+                props.signUp(user);
               }}
             >
               Sign Up
@@ -72,11 +71,11 @@ const SignUp: NextPage = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => {
-  return {user: state.auth.user}
-}
+  return { user: state.auth.user };
+};
 
 const mapDispatchToProps = {
-  signUp
-}
+  signUp,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
