@@ -1,15 +1,16 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { getAuthToken } from 'src/services/auth';
 
 axios.defaults.baseURL = 'http://localhost:8080/api';
 axios.defaults.headers.common.Accept = 'application/json';
 axios.defaults.timeout = 12000;
 
-const getHttpHeaders = (isAuthenticated = false): AxiosRequestConfig => {
-  // Add your custom logic here, for example add a Token to the Headers
-  if (isAuthenticated) {
+const getHttpHeaders = (): AxiosRequestConfig => {
+  const authToken = getAuthToken()
+  if (authToken) {
     return {
       headers: {
-        Authorization: 'Bearer YOUR_TOKEN',
+        Authorization: `Bearer ${authToken}`,
       },
     };
   }
