@@ -13,16 +13,20 @@ const signIn: ReactElement = (handler: Function) => {
   );
 };
 
-const Navbar: NextPage = ({user}:any) => {
+const Navbar: NextPage = ({ user }: any) => {
   const [authenticated, setAuthenticated] = useState(false);
   const [showSignInModal, setSignInModal] = useState(false);
 
-  useEffect(()=>{
-   if(user && Object.keys(user).length !== 0 && Object.getPrototypeOf(user) === Object.prototype){
-     setAuthenticated(true)
-     setSignInModal(false)
-   }
-  },[user])
+  useEffect(() => {
+    if (
+      user &&
+      Object.keys(user).length !== 0 &&
+      Object.getPrototypeOf(user) === Object.prototype
+    ) {
+      setAuthenticated(true);
+      setSignInModal(false);
+    }
+  }, [user]);
 
   return (
     <div className="navbar bg-base-100">
@@ -38,7 +42,7 @@ const Navbar: NextPage = ({user}:any) => {
               className="input input-bordered"
             />
           </div>
-          {authenticated ? <ProfileThumbnail/> : signIn(setSignInModal)}
+          {authenticated ? <ProfileThumbnail /> : signIn(setSignInModal)}
         </div>
         <Auth show={showSignInModal} reset={setSignInModal} />
       </>
@@ -46,11 +50,10 @@ const Navbar: NextPage = ({user}:any) => {
   );
 };
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state: any) => {
   return {
-    user:state.user
-  }
-}
-
+    user: state.user,
+  };
+};
 
 export default connect(mapStateToProps)(Navbar);
