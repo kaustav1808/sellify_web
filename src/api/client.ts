@@ -6,7 +6,7 @@ axios.defaults.headers.common.Accept = 'application/json';
 axios.defaults.timeout = 12000;
 
 const getHttpHeaders = (): AxiosRequestConfig => {
-  const authToken = getAuthToken()
+  const authToken = getAuthToken();
   if (authToken) {
     return {
       headers: {
