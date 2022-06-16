@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Auth from './Auth';
 import ProfileThumbnail from './ProfileThumbnail';
 
-const signIn: ReactElement = (handler: Function) => {
+const signIn = (handler: Function) => {
   return (
     <button className="btn btn-active" onClick={() => handler(true)}>
       {' '}
