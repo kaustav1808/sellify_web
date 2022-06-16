@@ -10,29 +10,11 @@ export const signIn =
       .post('/auth/signin', payload)
       .then((res) => {
         postAuth(res.data);
-        toast.success('Successfully signin.', {
-          position: 'bottom-right',
-          theme: 'dark',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success('Successfully signin.');
         dispatch(setAuthUser());
       })
       .catch((e) => {
-        toast.error(e.response.data.message, {
-          position: 'bottom-right',
-          theme: 'dark',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(e.response.data.message);
       });
   };
 
@@ -49,16 +31,7 @@ export const signUp =
         });
       })
       .catch((e) => {
-        toast.error(e.response.data.message, {
-          position: 'bottom-right',
-          theme: 'dark',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(e.response.data.message);
       });
   };
 
@@ -72,32 +45,14 @@ export const setAuthUser = () => (dispatch: any) => {
       });
     })
     .catch((e) => {
-      toast.error(e.response.data, {
-        position: 'bottom-right',
-        theme: 'dark',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(e.response.data);
     });
 };
 
 export const signOutUser = () => (dispatch: any) => {
   client.get('/auth/signout').then((res) => {
     clearTokens();
-    toast.success('Successfully signout...!!!', {
-      position: 'bottom-right',
-      theme: 'dark',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    toast.success('Successfully signout...!!!');
     dispatch({
       type: t.SIGN_OUT,
     });

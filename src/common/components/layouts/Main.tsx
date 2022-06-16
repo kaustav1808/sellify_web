@@ -14,7 +14,16 @@ const Main: NextPage = ({ user, setAuthUser, children }: any) => {
   return (
     <div>
       <Navbar />
-      <ToastContainer autoClose={2000} />
+      <ToastContainer position="bottom-right"
+      theme="dark"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover />
       {children}
     </div>
   );
