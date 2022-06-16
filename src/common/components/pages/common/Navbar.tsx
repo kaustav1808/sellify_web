@@ -25,6 +25,8 @@ const Navbar: NextPage = ({ user }: any) => {
     ) {
       setAuthenticated(true);
       setSignInModal(false);
+    }else{
+      setAuthenticated(false)
     }
   }, [user]);
 

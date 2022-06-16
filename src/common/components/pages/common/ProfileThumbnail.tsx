@@ -1,6 +1,9 @@
+import { signOutUser } from '@store/actions/auth';
 import { NextPage } from 'next';
+import { connect } from 'react-redux';
 
-const ProfileThumbnail: NextPage = () => {
+
+const ProfileThumbnail: NextPage = (props:any) => {
   return (
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -22,11 +25,15 @@ const ProfileThumbnail: NextPage = () => {
           <a>Settings</a>
         </li>
         <li>
-          <a onClick={() => console.log('i am logout')}>Logout</a>
+          <a onClick={() => props.signOutUser()}>Logout</a>
         </li>
       </ul>
     </div>
   );
 };
 
-export default ProfileThumbnail;
+const mapDispatchToProps = {
+    signOutUser
+}
+
+export default connect(undefined, mapDispatchToProps)(ProfileThumbnail);

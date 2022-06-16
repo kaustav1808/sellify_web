@@ -1,6 +1,16 @@
+import { signIn } from '@store/actions/auth';
 import { NextPage } from 'next';
+import { useState } from 'react';
+import { connect } from 'react-redux';
 
-const SignIn: NextPage = () => {
+const SignIn: NextPage = ({signIn}:any) => {
+  const [user, setUser] = useState({ email: '', username: '', password: '' });
+
+  const updateUser = (e:any) => {
+    let key = e.target.id;
+    setUser({ ...user, [key]: e.target.value });
+  };
+
   return (
     <div className="hero-content">
       <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -12,6 +22,9 @@ const SignIn: NextPage = () => {
             <input
               type="text"
               placeholder="email"
+              id="email"
+              value={user.email}
+              onChange={updateUser}
               className="input input-bordered"
             />
           </div>
@@ -20,8 +33,11 @@ const SignIn: NextPage = () => {
               <span className="label-text">Password</span>
             </label>
             <input
-              type="text"
+              type="password"
+              id="password"
               placeholder="password"
+              value={user.password}
+              onChange={updateUser}
               className="input input-bordered"
             />
             <label className="label">
@@ -34,7 +50,7 @@ const SignIn: NextPage = () => {
             <button
               className="btn btn-primary"
               onClick={() => {
-                console.log('hi! all');
+                signIn(user);
               }}
             >
               Sign In
@@ -46,4 +62,8 @@ const SignIn: NextPage = () => {
   );
 };
 
-export default SignIn;
+const mapDispatchToProps = {
+  signIn
+}
+
+export default connect(undefined, mapDispatchToProps)(SignIn);

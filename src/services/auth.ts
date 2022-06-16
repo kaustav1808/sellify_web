@@ -3,9 +3,7 @@ export const postAuth = (tokenPayload: {
   accesstoken: string;
   expiretime: string;
 }) => {
-  localStorage.removeItem('refresh_token');
-  localStorage.removeItem('access_token');
-  localStorage.removeItem('expiretime');
+  clearTokens()
 
   localStorage.setItem('refresh_token', tokenPayload.refreshtoken);
   localStorage.setItem('access_token', tokenPayload.accesstoken);
@@ -14,4 +12,10 @@ export const postAuth = (tokenPayload: {
 
 export const getAuthToken = () => {
   return localStorage.getItem('access_token');
+};
+
+export const clearTokens = () => {
+  localStorage.removeItem('refresh_token');
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('expiretime');
 };
