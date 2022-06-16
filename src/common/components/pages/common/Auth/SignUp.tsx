@@ -6,9 +6,9 @@ import { useState } from 'react';
 const SignUp: NextPage = (props: any) => {
   const [user, setUser] = useState({ email: '', username: '', password: '' });
 
-  const updateUser = (e) => {
-    let key = e.target.id;
-    setUser({ ...user, [key]: e.target.value });
+  const updateUser = (e: Event) => {
+    let target = e.target as HTMLFormElement
+    setUser({ ...user, [target.id]: target.value });
   };
 
   return (
