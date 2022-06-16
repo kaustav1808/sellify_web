@@ -3,7 +3,7 @@ export const postAuth = (tokenPayload: {
   accesstoken: string;
   expiretime: string;
 }) => {
-  clearTokens()
+  clearTokens();
 
   localStorage.setItem('refresh_token', tokenPayload.refreshtoken);
   localStorage.setItem('access_token', tokenPayload.accesstoken);

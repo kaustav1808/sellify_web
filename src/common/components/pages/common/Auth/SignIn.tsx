@@ -3,10 +3,10 @@ import { NextPage } from 'next';
 import { useState } from 'react';
 import { connect } from 'react-redux';
 
-const SignIn: NextPage = ({signIn}:any) => {
+const SignIn: NextPage = ({ signIn }: any) => {
   const [user, setUser] = useState({ email: '', username: '', password: '' });
 
-  const updateUser = (e:any) => {
+  const updateUser = (e: any) => {
     let key = e.target.id;
     setUser({ ...user, [key]: e.target.value });
   };
@@ -63,7 +63,7 @@ const SignIn: NextPage = ({signIn}:any) => {
 };
 
 const mapDispatchToProps = {
-  signIn
-}
+  signIn,
+};
 
 export default connect(undefined, mapDispatchToProps)(SignIn);

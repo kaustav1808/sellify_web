@@ -5,9 +5,9 @@ export const auth = (state = {}, action: any) => {
     case t.SIGN_UP:
       return { ...state, ...action.payload };
     case t.SET_AUTH_USER:
-      return {...state, ...action.payload}
+      return { ...state, ...action.payload };
     case t.SIGN_OUT:
-      return {}    
+      return {};
     default:
       return { ...state };
   }

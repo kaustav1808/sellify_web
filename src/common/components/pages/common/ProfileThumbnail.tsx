@@ -2,8 +2,7 @@ import { signOutUser } from '@store/actions/auth';
 import { NextPage } from 'next';
 import { connect } from 'react-redux';
 
-
-const ProfileThumbnail: NextPage = (props:any) => {
+const ProfileThumbnail: NextPage = (props: any) => {
   return (
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -33,7 +32,7 @@ const ProfileThumbnail: NextPage = (props:any) => {
 };
 
 const mapDispatchToProps = {
-    signOutUser
-}
+  signOutUser,
+};
 
 export default connect(undefined, mapDispatchToProps)(ProfileThumbnail);

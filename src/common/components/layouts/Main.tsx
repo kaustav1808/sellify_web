@@ -3,13 +3,13 @@ import Navbar from '../pages/common/Navbar';
 import { setAuthUser } from '@store/actions/auth';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Main: NextPage = ({user, setAuthUser, children}: any) => {
-  useEffect(()=>{
-    setAuthUser()
-  },[])
+const Main: NextPage = ({ user, setAuthUser, children }: any) => {
+  useEffect(() => {
+    setAuthUser();
+  }, []);
 
   return (
     <div>
@@ -20,12 +20,12 @@ const Main: NextPage = ({user, setAuthUser, children}: any) => {
   );
 };
 
-const mapStateToProps = (state:any) => {
-  return {user: state.user}
-}
+const mapStateToProps = (state: any) => {
+  return { user: state.user };
+};
 
 const mapDispatchToProps = {
-  setAuthUser
-}
+  setAuthUser,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps )(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
