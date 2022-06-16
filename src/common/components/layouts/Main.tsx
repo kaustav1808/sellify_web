@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Main: NextPage = ({ user, setAuthUser, children }: any) => {
+  console.log("calling me")
   useEffect(() => {
     setAuthUser();
   }, []);
