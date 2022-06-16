@@ -7,7 +7,7 @@ const SignUp: NextPage = (props: any) => {
   const [user, setUser] = useState({ email: '', username: '', password: '' });
 
   const updateUser = (e: Event) => {
-    let target = e.target as HTMLFormElement
+    let target = e.target as HTMLFormElement;
     setUser({ ...user, [target.id]: target.value });
   };
 
