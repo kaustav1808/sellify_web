@@ -1,13 +1,14 @@
 import { NextPage } from 'next';
+import { ScriptProps } from 'next/script';
 import { ReactElement } from 'react';
 
-type ModalType = {
+type ModalType = ScriptProps & {
   show: Boolean;
   resetModal: Function;
   children: ReactElement;
 };
 
-const Modal: NextPage = (props: ModalType) => {
+const Modal: NextPage<ModalType> = (props: ModalType) => {
   return (
     <div className={`modal  ${props.show ? 'modal-open' : ''}`}>
       <div className="modal-box w-10/12 bg-base-200">

@@ -1,19 +1,17 @@
 import Modal from '@components/ui/Modal';
 import { NextPage } from 'next';
+import { Props, ScriptProps } from 'next/script';
 import { useState } from 'react';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
-type AuthType = {
-  show: Boolean;
-  reset: Function;
-};
+type AuthType = ScriptProps & { show: Boolean, reset:Function}
 
-const Auth: NextPage = (props: AuthType) => {
+  const Auth: NextPage<AuthType> = ({show = false, reset }) => {
   const [toggleAction, setToggleAction] = useState('signin');
 
   return (
-    <Modal show={props.show} resetModal={() => props.reset(false)}>
+    <Modal show={show} resetModal={() => reset(false)}>
       <div className="flex hero min-h-auto max-w-auto bg-base-200">
         {toggleAction == 'signin' ? <SignIn /> : <SignUp />}
         <div className="flex flex-col gap-2 text-center lg:text-left">
