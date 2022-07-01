@@ -5,9 +5,9 @@ import { useState } from 'react';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
-type AuthType = ScriptProps & { show: Boolean, reset:Function}
+type AuthType = ScriptProps & { show: Boolean; reset: Function };
 
-  const Auth: NextPage<AuthType> = ({show = false, reset }) => {
+const Auth: NextPage<AuthType> = ({ show = false, reset }) => {
   const [toggleAction, setToggleAction] = useState('signin');
 
   return (
