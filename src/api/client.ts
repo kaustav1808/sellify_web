@@ -1,7 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { getAuthToken } from 'src/services/auth';
 
-axios.defaults.baseURL = 'http://sellifydev-env.eba-c3wcdarr.us-east-1.elasticbeanstalk.com/api';
+axios.defaults.baseURL =
+  'http://sellifydev-env.eba-c3wcdarr.us-east-1.elasticbeanstalk.com/api';
 axios.defaults.headers.common.Accept = 'application/json';
 axios.defaults.timeout = 12000;
 
