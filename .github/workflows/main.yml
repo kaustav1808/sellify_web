@@ -7,15 +7,27 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  check_lint:
     runs-on: ubuntu-latest
+    strategy:
+            matrix:
+                node_version: [16.10.x]
 
     steps:
       - uses: actions/checkout@v3
 
+      - name: setup node
+        uses: actions/setup-node@master
+        with:
+            node-version: ${{matrix.node_version}}
+
+      # Install dependencies
+      - name: install dependencies
+        run: npm install
+
       # Check code format
       - name: Check code format
-        run: npm run format:check
+        run: npm run format:check  
 
       # Check code format
       - name: Check code format
