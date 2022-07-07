@@ -3,8 +3,11 @@ name: Check Code completeness
 on:
   pull_request:
     branches: [ "master" ]
-  workflow_dispatch:
-    branches: ['master']  
+  workflow_call:
+    outputs:
+      check_lint_output:
+        description: Output for lint and format checking
+        value: ${{ jobs.check_lint.outputs }}  
 
 jobs:
   check_lint:
