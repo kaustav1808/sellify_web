@@ -3,6 +3,6 @@ module.exports = {
   reactStrictMode: true,
   images: {
     loader: 'imgix',
-    path: 'http://sellify.web.s3-website.ap-south-1.amazonaws.com/',
+    path: 'http://sellify.web.asset.s3-website.ap-south-1.amazonaws.com/',
   },
 }
