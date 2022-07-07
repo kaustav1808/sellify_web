@@ -9,6 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [check-lint]
+    env:
+        NEXT_PUBLIC_CLIENT_URL: ${{secrets.PROD_CLIENT_URL}}
     if: ${{ github.ref == 'refs/heads/master' }}
     
     steps:
