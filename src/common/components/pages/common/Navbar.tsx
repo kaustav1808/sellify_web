@@ -3,7 +3,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Auth from './Auth';
 import ProfileThumbnail from './ProfileThumbnail';
-import logo from '../../../../../public/logo.png' 
+import logo from '../../../../../public/logo.png';
 import Image from 'next/image';
 
 const signIn = (handler: Function) => {
