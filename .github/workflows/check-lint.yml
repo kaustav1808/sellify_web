@@ -7,7 +7,7 @@ on:
     outputs:
       check_lint_output:
         description: Output for lint and format checking
-        value: ${{ jobs.check_lint.outputs }}  
+        value: ${{ jobs.check_lint.outputs.job_output1 }}  
 
 jobs:
   check_lint:
@@ -33,5 +33,5 @@ jobs:
         run: npm run format:check  
 
       # Check code format
-      - name: Check code format
+      - name: check code lint
         run: npm run lint
