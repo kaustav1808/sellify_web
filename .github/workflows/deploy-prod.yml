@@ -1,0 +1,14 @@
+name: Deploy to Production
+
+on: [workflow_dispatch]
+
+jobs:
+  check-lint:
+    uses: kaustav1808/sellify_web/.github/workflows/check-lint.yml@master
+
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploying to Production
+        run: echo deploying  
