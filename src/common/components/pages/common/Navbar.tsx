@@ -3,6 +3,8 @@ import { ReactElement, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Auth from './Auth';
 import ProfileThumbnail from './ProfileThumbnail';
+import logo from '../../../../../public/logo.png' 
+import Image from 'next/image';
 
 const signIn = (handler: Function) => {
   return (
@@ -34,7 +36,7 @@ const Navbar: NextPage = ({ user }: any) => {
     <div className="navbar bg-base-100">
       <>
         <div className="flex-1">
-          <a className="normal-case text-xl">BuyNSell</a>
+          <Image width={150} height={50} src={logo} alt="No Image" />
         </div>
         <div className="flex-none gap-2">
           <div className="form-control">
