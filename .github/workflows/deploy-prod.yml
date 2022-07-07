@@ -27,4 +27,4 @@ jobs:
 
       - name: Copy files to the production bucket with the AWS CLI
         run: |
-          aws s3 sync ./out/* s3://${{secret.PRODUCTION_BUCKET}}  
+          aws s3 sync ./out/* s3://${{secrets.PRODUCTION_BUCKET}}  
