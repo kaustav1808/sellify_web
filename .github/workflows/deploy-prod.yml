@@ -15,8 +15,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: build frontend
-        run: npm run build  
+      - name: install dependencies
+        run: npm install
+
+      - name: build frontend code
+        run: npm run build    
 
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v1
