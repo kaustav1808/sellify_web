@@ -12,5 +12,19 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' }}
     
     steps:
-      - name: Deploying to Production
-        run: echo deploying  
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: build frontend
+        run: npm run build  
+
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Copy files to the production bucket with the AWS CLI
+        run: |
+          aws s3 sync ./out/* s3://${{secret.PRODUCTION_BUCKET}}  

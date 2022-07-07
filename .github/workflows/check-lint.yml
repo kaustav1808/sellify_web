@@ -32,6 +32,6 @@ jobs:
       - name: Check code format
         run: npm run format:check  
 
-      # Check code format
+      # Check code lint
       - name: check code lint
         run: npm run lint
