@@ -5,8 +5,6 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_CLIENT_URL;
 axios.defaults.headers.common.Accept = 'application/json';
 axios.defaults.timeout = 12000;
 
-console.log(process.env.NEXT_PUBLIC_CLIENT_URL);
-
 const getHttpHeaders = (): AxiosRequestConfig => {
   const authToken = getAuthToken();
   if (authToken) {
