@@ -1,4 +1,4 @@
-name: Deploy to development environment
+name: Deploy to Development Environment
 
 on: [workflow_dispatch]
 
@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-        NEXT_PUBLIC_CLIENT_URL: ${{secrets.DEV_CLIENT_URL}}
+      NEXT_PUBLIC_CLIENT_URL: ${{secrets.DEV_CLIENT_URL}}
     needs: [check-lint]
     if: ${{ github.ref == 'refs/heads/dev' }}
     
