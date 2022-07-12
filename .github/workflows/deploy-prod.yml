@@ -34,4 +34,6 @@ jobs:
 
       - name: Copy files to the production bucket with the AWS CLI
         run: |
-          aws s3 sync ./out/ s3://${{secrets.PRODUCTION_BUCKET}}  
+          aws s3 rm --recursive s3://${{secrets.PRODUCTION_BUCKET}}
+          aws s3 sync ./out/ s3://${{secrets.PRODUCTION_BUCKET}}
+          aws cloudfront create-invalidation --distribution-id {{secrets.PROD_CLOUDFRONT_DISTRIBUTION}} --paths "/*"    
