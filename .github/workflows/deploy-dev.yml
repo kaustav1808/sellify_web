@@ -35,4 +35,5 @@ jobs:
       - name: Copy files to the development bucket with the AWS CLI
         run: |
           aws s3 rm --recursive s3://${{secrets.DEVELOPMENT_BUCKET}}
-          aws s3 sync ./out/ s3://${{secrets.DEVELOPMENT_BUCKET}}  
+          aws s3 sync ./out/ s3://${{secrets.DEVELOPMENT_BUCKET}}
+          aws cloudfront create-invalidation --distribution-id {{secrets.DEV_CLOUDFRONT_DISTRIBUTION}} --paths "/*"  
