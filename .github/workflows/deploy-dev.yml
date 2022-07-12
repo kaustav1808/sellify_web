@@ -1,4 +1,4 @@
-name: Deploy to development environment
+name: Deploy to Development Environment
 
 on: [workflow_dispatch]
 
@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-        NEXT_PUBLIC_CLIENT_URL: ${{secrets.DEV_CLIENT_URL}}
+      NEXT_PUBLIC_CLIENT_URL: ${{secrets.DEV_CLIENT_URL}}
     needs: [check-lint]
     if: ${{ github.ref == 'refs/heads/dev' }}
     
@@ -34,4 +34,5 @@ jobs:
 
       - name: Copy files to the development bucket with the AWS CLI
         run: |
+          aws s3 rm --recursive s3://${{secrets.DEVELOPMENT_BUCKET}}
           aws s3 sync ./out/ s3://${{secrets.DEVELOPMENT_BUCKET}}  
