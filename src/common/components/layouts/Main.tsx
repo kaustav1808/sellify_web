@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
+import Image from 'next/image';
 
 const Main: NextPage = ({ user, setAuthUser, children }: any) => {
   useEffect(() => {
@@ -13,6 +15,12 @@ const Main: NextPage = ({ user, setAuthUser, children }: any) => {
 
   return (
     <div>
+      <Head>
+        <title>Sellify</title>
+        <link rel="icon" href="https://asset.sell-ify.co.in/logo_icon.png" type = "image/x-icon"/>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Navbar />
       <ToastContainer
         position="bottom-right"
