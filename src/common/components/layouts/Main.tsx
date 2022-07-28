@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
-import Image from 'next/image';
 
 const Main: NextPage = ({ user, setAuthUser, children }: any) => {
   useEffect(() => {
