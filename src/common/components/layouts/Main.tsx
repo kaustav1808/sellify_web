@@ -17,7 +17,11 @@ const Main: NextPage = ({ user, setAuthUser, children }: any) => {
     <div>
       <Head>
         <title>Sellify</title>
-        <link rel="icon" href="https://asset.sell-ify.co.in/logo_icon.png" type = "image/x-icon"/>
+        <link
+          rel="icon"
+          href="https://asset.sell-ify.co.in/logo_icon.png"
+          type="image/x-icon"
+        />
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
