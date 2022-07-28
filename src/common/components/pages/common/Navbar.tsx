@@ -8,7 +8,7 @@ import Image from 'next/image';
 const signIn = (handler: Function) => {
   return (
     <button className="btn btn-active" onClick={() => handler(true)}>
-      login/register
+      SignIn/SignUp
     </button>
   );
 };
