@@ -29,12 +29,12 @@ const ActionDropdown: NextPage = ({ user }: any) => {
                 clipRule="evenodd"
               />
             </svg>{' '}
-            Manage My bids
+            Manage My Bids
           </a>
         </li>
 
         <li>
-          <Link href="/CreateBid">
+          <Link href="/create-item">
             <a>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

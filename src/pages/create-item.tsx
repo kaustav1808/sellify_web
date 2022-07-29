@@ -6,12 +6,12 @@ type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-const CreateBid: NextPageWithLayout = () => {
+const CreateItem: NextPageWithLayout = () => {
   return <div className="w-full h-inherit">new create item</div>;
 };
 
-CreateBid.getLayout = function getLayout(page: ReactElement) {
+CreateItem.getLayout = function getLayout(page: ReactElement) {
   return <Main>{page}</Main>;
 };
 
-export default CreateBid;
+export default CreateItem;
