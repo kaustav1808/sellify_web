@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Auth from './Auth';
 import ProfileThumbnail from './ProfileThumbnail';
 import Image from 'next/image';
+import ActionDropdown from './ActionDropdown';
 
 const signIn = (handler: Function) => {
   return (
@@ -44,6 +45,7 @@ const Navbar: NextPage = ({ user }: any) => {
               className="input input-bordered"
             />
           </div>
+          {authenticated ? <ActionDropdown /> : ''}
           {authenticated ? <ProfileThumbnail /> : signIn(setSignInModal)}
         </div>
         <Auth show={showSignInModal} reset={setSignInModal} />
