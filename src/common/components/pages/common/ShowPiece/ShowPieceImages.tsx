@@ -2,29 +2,24 @@ import type { NextPage } from 'next';
 
 const ShowPieceImages: NextPage = () => {
   return (
-    <div className="h-80 carousel carousel-vertical rounded-box">
-      <div className="carousel-item h-full">
-        <img src="https://api.lorem.space/image/game?w=256&h=400&hash=8B7BCDC2" />
+    <>
+      <div className="card w-96 bg-base-100 shadow-xl">
+        <figure>
+          <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title">
+            Shoes!
+            <div className="badge badge-secondary">NEW</div>
+          </h2>
+          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <div className="card-actions justify-end">
+            <div className="badge badge-outline">Fashion</div>
+            <div className="badge badge-outline">Products</div>
+          </div>
+        </div>
       </div>
-      <div className="carousel-item h-full">
-        <img src="https://api.lorem.space/image/game?w=256&h=400&hash=500B67FB" />
-      </div>
-      <div className="carousel-item h-full">
-        <img src="https://api.lorem.space/image/game?w=256&h=400&hash=A89D0DE6" />
-      </div>
-      <div className="carousel-item h-full">
-        <img src="https://api.lorem.space/image/game?w=256&h=400&hash=225E6693" />
-      </div>
-      <div className="carousel-item h-full">
-        <img src="https://api.lorem.space/image/game?w=256&h=400&hash=9D9539E7" />
-      </div>
-      <div className="carousel-item h-full">
-        <img src="https://api.lorem.space/image/game?w=256&h=400&hash=BDC01094" />
-      </div>
-      <div className="carousel-item h-full">
-        <img src="https://api.lorem.space/image/game?w=256&h=400&hash=7F5AE56A" />
-      </div>
-    </div>
+    </>
   );
 };
 

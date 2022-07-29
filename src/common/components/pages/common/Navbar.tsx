@@ -5,6 +5,7 @@ import Auth from './Auth';
 import ProfileThumbnail from './ProfileThumbnail';
 import Image from 'next/image';
 import ActionDropdown from './ActionDropdown';
+import Link from 'next/link';
 
 const signIn = (handler: Function) => {
   return (
@@ -35,7 +36,9 @@ const Navbar: NextPage = ({ user }: any) => {
     <div className="navbar bg-base-100">
       <>
         <div className="flex-1">
-          <Image width={150} height={50} src="/logo.png" alt="No Image" />
+          <Link href="/">
+            <Image width={150} height={50} src="/logo.png" alt="No Image" />
+          </Link>
         </div>
         <div className="flex-none gap-2">
           <div className="form-control">
