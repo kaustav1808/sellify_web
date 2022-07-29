@@ -13,7 +13,7 @@ const Main: NextPage = ({ user, setAuthUser, children }: any) => {
   }, []);
 
   return (
-    <div className='h-full'>
+    <div className="h-full">
       <Head>
         <title>Sellify</title>
         <link

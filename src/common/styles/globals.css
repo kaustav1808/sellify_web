@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 html,
-body,#__next {
-        height: 100%;
-      }
+body,
+#__next {
+  height: 100%;
+}
 
 :root {
   background-color: whitesmoke;
