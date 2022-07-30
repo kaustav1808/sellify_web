@@ -7,11 +7,11 @@ type NextPageWithLayout = NextPage & {
 };
 
 const CreateItem: NextPageWithLayout = () => {
-  return (<div className="w-full h-inherit p-2">
-    <div className=''>
-
+  return (
+    <div className="w-full h-inherit p-2">
+      <div className=""></div>
     </div>
-  </div>);
+  );
 };
 
 CreateItem.getLayout = function getLayout(page: ReactElement) {
