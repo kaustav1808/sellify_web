@@ -9,7 +9,7 @@ type NextPageWithLayout = NextPage & {
 
 const Home: NextPageWithLayout = () => {
   return (
-    <div className="p-2 flex gap-2">
+    <div className="p-4 flex gap-2">
       <ShowPiece />
       <ShowPiece />
       <ShowPiece />
