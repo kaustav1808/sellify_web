@@ -1,12 +1,14 @@
 import type { NextPage } from 'next';
 import Main from '@components/layouts/Main';
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode, useState } from 'react';
+import CreateItem from '@components/pages/items/CreateItem';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
 const Items: NextPageWithLayout = () => {
+  const [createItem, setCreateItem] = useState(false)
   return (
     <div className="w-full h-inherit p-4">
       <div className="flex">
@@ -16,7 +18,7 @@ const Items: NextPageWithLayout = () => {
           <a className="tab tab-lg tab-bordered">Closed</a>
         </div>
         <div className="w-1/12">
-          <button className="btn btn-active btn-primary">
+          <button className="btn btn-active btn-primary" onClick={() => setCreateItem(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -28,6 +30,7 @@ const Items: NextPageWithLayout = () => {
             Add Item
           </button>
         </div>
+        <CreateItem show={createItem} reset={setCreateItem} />
       </div>
     </div>
   );
