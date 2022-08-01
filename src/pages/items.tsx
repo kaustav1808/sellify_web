@@ -8,7 +8,7 @@ type NextPageWithLayout = NextPage & {
 };
 
 const Items: NextPageWithLayout = () => {
-  const [createItem, setCreateItem] = useState(false)
+  const [createItem, setCreateItem] = useState(false);
   return (
     <div className="w-full h-inherit p-4">
       <div className="flex">
@@ -18,7 +18,10 @@ const Items: NextPageWithLayout = () => {
           <a className="tab tab-lg tab-bordered">Closed</a>
         </div>
         <div className="w-1/12">
-          <button className="btn btn-active btn-primary" onClick={() => setCreateItem(true)}>
+          <button
+            className="btn btn-active btn-primary"
+            onClick={() => setCreateItem(true)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
