@@ -6,12 +6,15 @@ type ModalType = ScriptProps & {
   show: Boolean;
   resetModal: Function;
   children: ReactElement;
+  width?: String;
 };
 
 const Modal: NextPage<ModalType> = (props: ModalType) => {
   return (
     <div className={`modal  ${props.show ? 'modal-open' : ''}`}>
-      <div className="modal-box w-10/12 bg-base-200">
+      <div
+        className={`modal-box w-10/12 bg-base-200 max-w-${props.width || 'xl'}`}
+      >
         <label
           htmlFor="my-modal-3"
           onClick={() => {
