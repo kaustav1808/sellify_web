@@ -65,8 +65,8 @@ const SelectBox: NextPage<SelectType> = ({
     const selectedValues = curr.map((o) => o.value);
 
     onInputChange(multiple ? selectedValues : selectedValues[0]);
-    setShowOption(()=> false);
-    setSelected(()=> curr);
+    setShowOption(() => false);
+    setSelected(() => curr);
   };
 
   const muilipleLabel = () => {
