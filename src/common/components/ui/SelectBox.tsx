@@ -35,7 +35,6 @@ const SelectBox: NextPage<SelectType> = ({
   const [showOption, setShowOption] = useState(false);
 
   const selectOption = (e: any, value: number | string) => {
-    console.log(e)
     const selectedOption = e.target;
     let label = selectedOption.text;
     let unique = selectedOption.id;
@@ -71,7 +70,7 @@ const SelectBox: NextPage<SelectType> = ({
   };
 
   const muilipleLabel = () => {
-    if (!selected.length) return (<div className='p-2'>Select An Option</div>);
+    if (!selected.length) return <div className="p-2">Select An Option</div>;
     return selected.map((o) => (
       <li key={o.value}>
         <div className="badge badge-success gap-2">
@@ -97,13 +96,13 @@ const SelectBox: NextPage<SelectType> = ({
   const renderOptions = () => {
     return (
       <ul className="dropdown-content menu bg-base-100 w-full p-2 rounded-box">
-        <li className='menu-title'>
-          <label >Select An Option</label>
+        <li className="menu-title">
+          <label>Select An Option</label>
         </li>
         {options.map((o: any) => (
           <li
             key={unique ? o[unique] : o.id}
-            onClick={(e) => console.log("here i am ")}
+            onClick={(e) => console.log('here i am ')}
           >
             <label id={unique ? o[unique] : o.id}>
               {label ? o[label] : o.label}{' '}
