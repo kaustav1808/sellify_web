@@ -102,7 +102,11 @@ const SelectBox: NextPage<SelectType> = ({
         {options.map((o: any) => (
           <li
             key={unique ? o[unique] : o.id}
-            onClick={(e) => console.log('here i am ')}
+            onClick={(e) => {
+              e.preventDefault();
+              console.log('here i am ');
+              selectOption(e, value ? o[value] : o.value);
+            }}
           >
             <label id={unique ? o[unique] : o.id}>
               {label ? o[label] : o.label}{' '}
