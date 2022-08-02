@@ -19,7 +19,7 @@ const Items: NextPageWithLayout = () => {
         </div>
         <div className="w-1/12">
           <button
-            className="btn btn-success"
+            className="btn btn-active"
             onClick={() => setCreateItem(true)}
           >
             <svg
