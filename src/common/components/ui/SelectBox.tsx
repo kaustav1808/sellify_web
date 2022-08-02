@@ -36,7 +36,7 @@ const SelectBox: NextPage<SelectType> = ({
 
   const selectOption = (e: any, value: number | string) => {
     const selectedOption = e.target;
-    let label = selectedOption.text;
+    let label = selectedOption.innerHTML;
     let unique = selectedOption.id;
 
     let curr = selected;
@@ -72,8 +72,7 @@ const SelectBox: NextPage<SelectType> = ({
   const muilipleLabel = () => {
     if (!selected.length) return <div className="p-2">Select An Option</div>;
     return selected.map((o) => (
-      <li key={o.value}>
-        <div className="badge badge-success gap-2">
+        <div key={o.value} className="badge badge-success gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -89,13 +88,12 @@ const SelectBox: NextPage<SelectType> = ({
           </svg>
           {o.label}
         </div>
-      </li>
     ));
   };
 
   const renderOptions = () => {
     return (
-      <ul className="dropdown-content menu bg-base-100 w-full p-2 rounded-box">
+      <ul tabIndex={0} className="dropdown-content menu bg-base-100 w-full p-2 rounded-box">
         <li className="menu-title">
           <label>Select An Option</label>
         </li>
