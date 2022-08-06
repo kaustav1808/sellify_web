@@ -2,10 +2,13 @@ import Modal from '@components/ui/Modal';
 import SelectBox from '@components/ui/SelectBox';
 import { NextPage } from 'next';
 import { ScriptProps } from 'next/script';
+import { useState } from 'react';
+import * as Types from '@customtypes/ui/common';
 
 type ItemModalType = ScriptProps & { show: Boolean; reset: Function };
 
 const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
+  const [state, setState] = useState<Types.CreateItemType>(Types.DefaultCreateItem)
   let resetItem = (set: boolean = true) => {
     reset(set);
     console.log('I am clicked');
