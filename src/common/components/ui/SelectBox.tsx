@@ -14,6 +14,11 @@ type DefaultStateType = {
   unique: number | string;
 };
 
+type StateType = {
+  selected: DefaultStateType[],
+  opened: boolean
+}
+
 type SelectType = ScriptProps & {
   options: DefaultOptionType[] | any[];
   multiple?: Boolean;
@@ -31,15 +36,20 @@ const SelectBox: NextPage<SelectType> = ({
   label = 'label',
   value = 'name',
 }: SelectType) => {
-  const [selected, setSelected] = useState<DefaultStateType[]>([]);
-  const [showOption, setShowOption] = useState(false);
+  const [state, setState] = useState<StateType>({ selected:[], opened:false });
+
+  const updateState = (obj: any) => {
+    const curr = state
+    setState({... curr, ... obj})
+  }
 
   const selectOption = (e: any, value: number | string) => {
+    e.stopPropagation();
     const selectedOption = e.target;
     let label = selectedOption.innerHTML;
     let unique = selectedOption.id;
 
-    let curr = selected;
+    let curr = state.selected;
     let newObj = {
       value,
       label,
@@ -51,8 +61,7 @@ const SelectBox: NextPage<SelectType> = ({
     ).length;
 
     if (checkIfExists) {
-      const selectedValues = curr.map((o) => o.value);
-      onInputChange(multiple ? selectedValues : selectedValues[0]);
+      returnSelected(curr)
       return;
     }
 
@@ -62,17 +71,27 @@ const SelectBox: NextPage<SelectType> = ({
       curr = [newObj];
     }
 
-    const selectedValues = curr.map((o) => o.value);
-
-    onInputChange(multiple ? selectedValues : selectedValues[0]);
-    setShowOption(() => false);
-    setSelected(() => curr);
+    returnSelected(curr)
+    updateState({selected: curr, opened: false});
   };
 
+  const returnSelected = (arr: DefaultStateType[] ) => {
+    const selectedValues = arr.map((o) => o.value);
+    onInputChange(selectedValues);
+  }
+
+  const removeItem = (e: any , key: number | string) => {
+    e.stopPropagation();
+    let curr = state.selected
+    curr = curr.filter(o => key !== o.unique )
+    returnSelected(curr)
+    updateState({selected: curr})
+  }
+
   const muilipleLabel = () => {
-    if (!selected.length) return <div>Select An Option</div>;
-    return selected.map((o) => (
-      <div key={o.value} className="badge badge-success gap-2">
+    if (!state.selected.length) return <div>Select An Option</div>;
+    return state.selected.map((o) => (
+      <div key={o.value} className="badge badge-success gap-2" onClick={(e)=> removeItem(e, o.unique)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -115,11 +134,11 @@ const SelectBox: NextPage<SelectType> = ({
   };
 
   return (
-    <div className="dropdown" onClick={() => setShowOption(true)}>
+    <div className="dropdown" onClick={() => updateState({ opened: true})}>
       <label tabIndex={0} className="select select-bordered w-full">
-        <div className="p-2">{muilipleLabel()}</div>
+        <div className="flex gap-1 p-2">{muilipleLabel()}</div>
       </label>
-      {showOption ? renderOptions() : ''}
+      {state.opened ? renderOptions() : ''}
     </div>
   );
 };
