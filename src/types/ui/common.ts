@@ -1,12 +1,12 @@
 export type CreateItemType = {
-    title: string;
-    shortDescription: string;
-    description: string;
-    tags: string[];
-    sellType: string;
-    priceMin: number | null;
-    priceMax: number | null;
-  };
+  title: string;
+  shortDescription: string;
+  description: string;
+  tags: string[];
+  sellType: string;
+  priceMin: number | null;
+  priceMax: number | null;
+};
 
 export const DefaultCreateItem = {
   title: '',
@@ -15,5 +15,5 @@ export const DefaultCreateItem = {
   tags: [],
   sellType: '',
   priceMin: null,
-  priceMax: null
-}; 
+  priceMax: null,
+};

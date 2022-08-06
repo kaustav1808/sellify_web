@@ -8,7 +8,9 @@ import * as Types from '@customtypes/ui/common';
 type ItemModalType = ScriptProps & { show: Boolean; reset: Function };
 
 const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
-  const [state, setState] = useState<Types.CreateItemType>(Types.DefaultCreateItem)
+  const [state, setState] = useState<Types.CreateItemType>(
+    Types.DefaultCreateItem,
+  );
   let resetItem = (set: boolean = true) => {
     reset(set);
     console.log('I am clicked');
