@@ -5,7 +5,11 @@ import { ReactElement, ReactNode } from 'react';
 import { wrapper } from '../redux/store';
 import { makeServer } from '../mocks/mirage';
 
-makeServer();
+if (process.env.NEXT_PUBLIC_DEMO_ENV === 'true') {
+  console.log("Starting Mocking server...!!!")
+  makeServer();
+}
+
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
