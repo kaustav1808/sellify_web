@@ -13,7 +13,7 @@ const Main: NextPage = ({ user, setAuthUser, children }: any) => {
   }, []);
 
   return (
-    <div>
+    <div className="h-full">
       <Head>
         <title>Sellify</title>
         <link
@@ -37,7 +37,9 @@ const Main: NextPage = ({ user, setAuthUser, children }: any) => {
         draggable
         pauseOnHover
       />
-      {children}
+      <div className="h-full bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r">
+        {children}
+      </div>
     </div>
   );
 };
