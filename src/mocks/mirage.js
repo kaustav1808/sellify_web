@@ -32,8 +32,8 @@ export function makeServer() {
     },
 
     routes() {
-      this.urlPrefix = 'http://localhost:8080';
-      this.namespace = 'api';
+      this.urlPrefix = process.env.NEXT_PUBLIC_CLIENT_URL;
+      this.namespace = '';
 
       this.get('/items', (schema) => {
         return schema.items.all();
