@@ -1,0 +1,40 @@
+name: Deploy to Demo Environment
+
+on: [workflow_dispatch]
+
+jobs:
+  check-lint:
+    uses: kaustav1808/sellify_web/.github/workflows/check-lint-demo.yml@demo
+
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_CLIENT_URL: ${{secrets.DEV_CLIENT_URL}}
+      NEXT_PUBLIC_DEMO_ENV : true
+    needs: [check-lint]
+    if: ${{ github.ref == 'refs/heads/demo' }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: install dependencies
+        run: npm install
+
+      - name: build frontend code
+        run: |
+          npm run build    
+          npm run export    
+
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Copy files to the demo bucket with the AWS CLI
+        run: |
+          aws s3 rm --recursive s3://${{secrets.DEMO_BUCKET}}
+          aws s3 sync ./out/ s3://${{secrets.DEMO_BUCKET}}
+          aws cloudfront create-invalidation --distribution-id ${{secrets.DEMO_CLOUDFRONT_DISTRIBUTION}} --paths "/*"  

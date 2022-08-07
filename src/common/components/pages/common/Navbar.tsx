@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Auth from './Auth';
 import ProfileThumbnail from './ProfileThumbnail';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const signIn = (handler: Function) => {
   return (
@@ -32,11 +33,18 @@ const Navbar: NextPage = ({ user }: any) => {
 
   return (
     <div className="navbar bg-base-100">
-      <>
-        <div className="flex-1">
-          <Image width={150} height={50} src="/logo.png" alt="No Image" />
+      <div className="flex w-full gap-8">
+        <div className="w-1/5">
+          <Link href="/">
+            <Image width={150} height={50} src="/logo.png" alt="No Image" />
+          </Link>
         </div>
-        <div className="flex-none gap-2">
+
+        <div className="w-3/5 text-center text-2xl text-amber-200">
+          {authenticated ? `Hi! ${user.username}` : `Welcome to sellify`}
+        </div>
+
+        <div className="flex w-1/5 content-around justify-end  gap-2">
           <div className="form-control">
             <input
               type="text"
@@ -44,10 +52,12 @@ const Navbar: NextPage = ({ user }: any) => {
               className="input input-bordered"
             />
           </div>
-          {authenticated ? <ProfileThumbnail /> : signIn(setSignInModal)}
+          <div>
+            {authenticated ? <ProfileThumbnail /> : signIn(setSignInModal)}
+          </div>
         </div>
-        <Auth show={showSignInModal} reset={setSignInModal} />
-      </>
+      </div>
+      <Auth show={showSignInModal} reset={setSignInModal} />
     </div>
   );
 };

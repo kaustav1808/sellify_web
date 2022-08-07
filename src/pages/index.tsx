@@ -9,7 +9,7 @@ type NextPageWithLayout = NextPage & {
 
 const Home: NextPageWithLayout = () => {
   return (
-    <div className="p-2 grid md:grid-cols-3 gap-8 bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r">
+    <div className="p-4 flex gap-2">
       <ShowPiece />
       <ShowPiece />
       <ShowPiece />
