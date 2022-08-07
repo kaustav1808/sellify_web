@@ -45,7 +45,7 @@ export const setAuthUser = () => (dispatch: any) => {
       });
     })
     .catch((e) => {
-      console.log(e)
+      console.log(e);
       toast.error(e.response.data);
     });
 };
