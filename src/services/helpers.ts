@@ -1,9 +1,9 @@
-export const getClass = (obj:any) => {
-   let classname = '';
+export const getClass = (obj: any) => {
+  let classname = '';
 
-   for(const [key, value] of Object.entries(obj)){
-      if (value) classname += " " + key;
-   }
+  for (const [key, value] of Object.entries(obj)) {
+    if (value) classname += ' ' + key;
+  }
 
-   return classname
-}
+  return classname;
+};

@@ -11,15 +11,19 @@ type NextPageWithLayout = NextPage & {
 const Items: NextPageWithLayout = () => {
   const [createItem, setCreateItem] = useState(false);
   const [selectedTab, setSelectedTab] = useState('All');
-  
+
   return (
     <div className="w-full h-inherit p-4">
       <div className="flex">
-        <div className='w-7/12'>
-          <Tabs list={['All', 'Setteled', 'Open']} selected={selectedTab} changeTab={setSelectedTab}/>
+        <div className="w-7/12">
+          <Tabs
+            list={['All', 'Setteled', 'Open']}
+            selected={selectedTab}
+            changeTab={setSelectedTab}
+          />
         </div>
-        <div className='w-4/12'></div>
-        
+        <div className="w-4/12"></div>
+
         <div className="w-1/12">
           <button
             className="btn btn-active"

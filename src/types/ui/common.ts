@@ -1,4 +1,4 @@
-import { ScriptProps } from "next/script";
+import { ScriptProps } from 'next/script';
 
 export type CreateItemType = {
   title: string;
@@ -19,7 +19,6 @@ export const DefaultCreateItem = {
   priceMin: null,
   priceMax: null,
 };
-
 
 export type TabsType = ScriptProps & {
   list: string[];
