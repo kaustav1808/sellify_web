@@ -8,23 +8,21 @@ import { CreateItemType, DefaultCreateItem } from '@customtypes/ui/common';
 type ItemModalType = ScriptProps & { show: Boolean; reset: Function };
 
 const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
-  const [state, setState] = useState<CreateItemType>(
-    DefaultCreateItem,
-  );
+  const [state, setState] = useState<CreateItemType>(DefaultCreateItem);
 
   const updateState = (obj: any) => {
-   let curr = state;
-   setState({... curr, ...obj })
-  }
+    let curr = state;
+    setState({ ...curr, ...obj });
+  };
 
   let resetItem = (set: boolean = true) => {
     updateState(DefaultCreateItem);
     reset(set);
   };
 
-  let selectedItem = (val: Array<number|string>, key:string) => {
-    const value = key === 'tags' ? val : (val.length? val[0] : null)
-    updateState({[key]: value})
+  let selectedItem = (val: Array<number | string>, key: string) => {
+    const value = key === 'tags' ? val : val.length ? val[0] : null;
+    updateState({ [key]: value });
   };
 
   return (
@@ -43,7 +41,7 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
               placeholder="ex: Wooden chair"
               value={state.title}
               className="input input-bordered input-md w-full max-w-2xl"
-              onChange={(e)=> updateState({title: e.target.value})}
+              onChange={(e) => updateState({ title: e.target.value })}
             />
           </div>
 
@@ -56,7 +54,9 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
               value={state.shortDescription}
               placeholder="ex: Wooden chair"
               className="input input-bordered input-md w-full max-w-2xl"
-              onChange={(e)=> updateState({shortDescription: e.target.value})}
+              onChange={(e) =>
+                updateState({ shortDescription: e.target.value })
+              }
             />
           </div>
 
@@ -68,7 +68,7 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
               placeholder="ex: Wooden chair"
               value={state.description}
               className="input input-bordered input-md w-full max-w-2xl h-20"
-              onChange={(e)=> updateState({description: e.target.value})}
+              onChange={(e) => updateState({ description: e.target.value })}
             ></textarea>
           </div>
 
@@ -84,7 +84,9 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
               ]}
               value="id"
               multiple={true}
-              onInputChange={(val:Array<number|string>) => selectedItem(val, 'tags')}
+              onInputChange={(val: Array<number | string>) =>
+                selectedItem(val, 'tags')
+              }
             />
           </div>
 
@@ -98,7 +100,9 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
                 { id: 2, name: 'range', label: 'Price range' },
                 { id: 3, name: 'auction', label: 'Auction' },
               ]}
-              onInputChange={(val:Array<number|string>) => selectedItem(val, 'sellType')}
+              onInputChange={(val: Array<number | string>) =>
+                selectedItem(val, 'sellType')
+              }
             />
           </div>
 
