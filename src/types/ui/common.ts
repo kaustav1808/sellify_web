@@ -6,8 +6,8 @@ export type CreateItemType = {
   description: string;
   tags: string[];
   sellType: string;
-  priceMin: number | null;
-  priceMax: number | null;
+  priceMin: number;
+  priceMax: number;
 };
 
 export const DefaultCreateItem = {
@@ -16,8 +16,8 @@ export const DefaultCreateItem = {
   description: '',
   tags: [],
   sellType: '',
-  priceMin: null,
-  priceMax: null,
+  priceMin: 0,
+  priceMax: 0,
 };
 
 export type TabsType = ScriptProps & {

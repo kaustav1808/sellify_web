@@ -4,6 +4,8 @@ import { NextPage } from 'next';
 import { ScriptProps } from 'next/script';
 import { useState } from 'react';
 import { CreateItemType, DefaultCreateItem } from '@customtypes/ui/common';
+import client from 'src/api/client';
+import { toast } from 'react-toastify';
 
 type ItemModalType = ScriptProps & { show: Boolean; reset: Function };
 
@@ -22,7 +24,58 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
 
   let selectedItem = (val: Array<number | string>, key: string) => {
     const value = key === 'tags' ? val : val.length ? val[0] : null;
-    updateState({ [key]: value });
+    let params = { [key]: value };
+
+    if (key === 'sellType') {
+      params['priceMin'] = 0;
+      params['priceMax'] = 0;
+    }
+
+    updateState(params);
+  };
+
+  let saveItem = async () => {
+    try {
+      await client.post('/items', state);
+      toast.success('Item created Successfully');
+      resetItem(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  let priceSection = () => {
+    let priceMax = (
+      <div className="form-control w-1/2">
+        <label className="label">
+          <span className="label-text text-lg">Max Price</span>
+        </label>
+        <input
+          type="text"
+          value={state.priceMax}
+          placeholder="ex: 100"
+          className="input input-bordered input-md w-full max-w-2xl"
+          onChange={(e) => updateState({ priceMax: e.target.value })}
+        />
+      </div>
+    );
+    return (
+      <div className="flex max-w-2xl gap-2">
+        <div className="form-control w-1/2">
+          <label className="label">
+            <span className="label-text text-lg">Min Price</span>
+          </label>
+          <input
+            type="text"
+            value={state.priceMin}
+            placeholder="ex: 100"
+            className="input input-bordered input-md w-full max-w-2xl"
+            onChange={(e) => updateState({ priceMin: e.target.value })}
+          />
+        </div>
+        {state.sellType === 'range' ? priceMax : ''}
+      </div>
+    );
   };
 
   return (
@@ -106,9 +159,15 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
             />
           </div>
 
+          {state.sellType ? priceSection() : ''}
+
           <div className="flex justify-between gap-8">
-            <button className="btn btn-error">CANCEL</button>
-            <button className="btn btn-success">SAVE</button>
+            <button className="btn btn-error" onClick={() => resetItem(false)}>
+              CANCEL
+            </button>
+            <button className="btn btn-success" onClick={saveItem}>
+              SAVE
+            </button>
           </div>
         </div>
       </>
