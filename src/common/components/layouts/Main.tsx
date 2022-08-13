@@ -37,7 +37,7 @@ const Main: NextPage = ({ user, setAuthUser, children }: any) => {
         draggable
         pauseOnHover
       />
-      <div className="h-full bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r">
+      <div className="h-inherit bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r overflow-y-scroll">
         {children}
       </div>
     </div>

@@ -1,5 +1,22 @@
 import { ScriptProps } from 'next/script';
 
+export type Item = {
+  id: string;
+  title: string;
+  shortDescription: string;
+  description: string;
+  tags: string[];
+  sellType: string;
+  priceMin: number;
+  priceMax: number;
+  status: string;
+};
+
+export type ItemType = ScriptProps & {
+  key: string;
+  value: Item
+};
+
 export type CreateItemType = {
   title: string;
   shortDescription: string;

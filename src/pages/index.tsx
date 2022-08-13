@@ -1,21 +1,30 @@
 import type { NextPage } from 'next';
 import Main from '@components/layouts/Main';
-import { ReactElement, ReactNode } from 'react';
-import ShowPiece from '@components/pages/common/ShowPiece';
+import { ReactElement, ReactNode, useEffect, useState } from 'react';
+import Item from '@components/pages/common/Item';
+import { ItemType } from '@customtypes/ui/common';
+import client from 'src/api/client';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
 const Home: NextPageWithLayout = () => {
+  const [items, setItems] = useState<ItemType[]>([])
+  
+  useEffect(()=>{
+    client.get('/items').then(res=>{
+      setItems(res.data.items)
+    }).catch((e)=>{
+      console.log(e)
+    })
+  },[])
+
   return (
-    <div className="p-4 flex gap-2">
-      <ShowPiece />
-      <ShowPiece />
-      <ShowPiece />
-      <ShowPiece />
-      <ShowPiece />
-      <ShowPiece />
+    <div className="p-4 grid grid-cols-5 gap-2 h-inherit overflow-y-hidden">
+      {
+        items.map(item=> <Item key={item.id} value={item}  />)
+      }
     </div>
   );
 };

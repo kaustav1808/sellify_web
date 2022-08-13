@@ -42,6 +42,9 @@ const Items: NextPageWithLayout = () => {
         </div>
         <CreateItem show={createItem} reset={setCreateItem} />
       </div>
+      <div className='flex'>
+
+      </div>
     </div>
   );
 };
