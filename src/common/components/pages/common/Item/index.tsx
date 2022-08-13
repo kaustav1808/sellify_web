@@ -14,13 +14,15 @@ const Item: NextPage<ItemType> = ({ value }: ItemType) => {
             {value.title}
             {/* <div className="badge badge-secondary">NEW</div> */}
           </span>
-          <p className='text-slate-300 h-1/2 overflow-hidden text-ellipsis mb-2'>{getShortDescription(value.shortDescription)}</p>
+          <p className="text-slate-300 h-1/2 overflow-hidden text-ellipsis mb-2">
+            {getShortDescription(value.shortDescription)}
+          </p>
           <div className="card-actions">
-            {
-              getShortTags(value.tags).map(element=> (<div key={element} className="badge badge-success">{element}</div>))
-              
-            }
-
+            {getShortTags(value.tags).map((element) => (
+              <div key={element} className="badge badge-success">
+                {element}
+              </div>
+            ))}
           </div>
         </div>
       </div>

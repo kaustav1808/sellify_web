@@ -14,7 +14,7 @@ export type Item = {
 
 export type ItemType = ScriptProps & {
   key: string;
-  value: Item
+  value: Item;
 };
 
 export type CreateItemType = {

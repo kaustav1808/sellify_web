@@ -10,21 +10,24 @@ type NextPageWithLayout = NextPage & {
 };
 
 const Home: NextPageWithLayout = () => {
-  const [items, setItems] = useState<ItemType[]>([])
-  
-  useEffect(()=>{
-    client.get('/items').then(res=>{
-      setItems(res.data.items)
-    }).catch((e)=>{
-      console.log(e)
-    })
-  },[])
+  const [items, setItems] = useState<ItemType[]>([]);
+
+  useEffect(() => {
+    client
+      .get('/items')
+      .then((res) => {
+        setItems(res.data.items);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   return (
     <div className="p-4 grid grid-cols-5 gap-2 h-inherit overflow-y-hidden">
-      {
-        items.map(item=> <Item key={item.id} value={item}  />)
-      }
+      {items.map((item) => (
+        <Item key={item.id} value={item} />
+      ))}
     </div>
   );
 };
