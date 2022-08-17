@@ -21,8 +21,8 @@ export function makeServer() {
       });
 
       this.post('/items', (schema, request) => {
-        const params = JSON.parse(request.requestBody)
-        params.status = 'open'
+        const params = JSON.parse(request.requestBody);
+        params.status = 'open';
         schema.db.items.insert(params);
         return { message: 'success' };
       });
