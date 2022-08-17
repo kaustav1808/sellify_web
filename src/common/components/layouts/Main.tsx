@@ -24,7 +24,13 @@ const Main: NextPage = ({ user, setAuthUser, children }: any) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Navbar />
+      <div className="flex flex-col h-full">
+        <Navbar />
+        <div className="h-[95%] bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r overflow-auto">
+          {children}
+        </div>
+      </div>
+
       <ToastContainer
         position="bottom-right"
         theme="dark"
@@ -37,9 +43,6 @@ const Main: NextPage = ({ user, setAuthUser, children }: any) => {
         draggable
         pauseOnHover
       />
-      <div className="h-inherit bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r overflow-y-scroll">
-        {children}
-      </div>
     </div>
   );
 };
