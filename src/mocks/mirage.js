@@ -21,7 +21,7 @@ export function makeServer() {
       });
 
       this.post('/items', (schema, request) => {
-        schema.db.items.insert(request.requestBody);
+        schema.db.items.insert(JSON.parse(request.requestBody));
         return { message: 'success' };
       });
 
