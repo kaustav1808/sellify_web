@@ -32,7 +32,7 @@ const Navbar: NextPage = ({ user }: any) => {
   }, [user]);
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 h-[5%]">
       <div className="flex w-full gap-8">
         <div className="w-1/5">
           <Link href="/">

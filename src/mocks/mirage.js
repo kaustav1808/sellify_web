@@ -1,42 +1,36 @@
 import { createServer, Model } from 'miragejs';
+import runSeed from './seeds';
 
 export function makeServer() {
   let server = createServer({
     models: {
-      item: Model,
-      user: Model,
+      items: Model,
+      users: Model,
     },
 
     seeds(server) {
-      server.create('item', {
-        title: 'First Item',
-        description: 'First item description',
-        price: 200,
-      });
-      server.create('item', {
-        title: 'Second Item',
-        description: 'Second item description',
-        price: 250,
-      });
-      server.create('item', {
-        title: 'Third Item',
-        description: 'Third item description',
-        price: 300,
-      });
-
-      server.create('user', {
-        email: 'kaustavofficial1808@gmail.com',
-        id: '62baaa3c3d9f7a4ecdf0de5f',
-        username: 'kaustavofficial1808@gmail.com',
-      });
+      runSeed(server);
     },
 
     routes() {
       this.urlPrefix = process.env.NEXT_PUBLIC_CLIENT_URL;
       this.namespace = '';
 
-      this.get('/items', (schema) => {
-        return schema.items.all();
+      this.get('/items', (schema, request) => {
+        let items = schema.items.all();
+        if (request.queryParams.type === 'all') return items;
+        items = items.filter(
+          (item) => item.status === request.queryParams.type,
+        );
+
+        return items;
+      });
+
+      this.post('/items', (schema, request) => {
+        const params = JSON.parse(request.requestBody);
+        params.status = 'open';
+        schema.db.items.insert(params);
+        return { message: 'success' };
       });
 
       this.get('/user', (schema) => {
