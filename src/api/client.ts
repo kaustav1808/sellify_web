@@ -19,11 +19,16 @@ const getHttpHeaders = (): AxiosRequestConfig => {
 };
 
 const client = {
-  get: (path: string): Promise<AxiosResponse> => axios.get(path, getHttpHeaders()),
-  post: (path: string, data: any): Promise<AxiosResponse> => axios.post(path, data, getHttpHeaders()),
-  put: (path: string, data: any): Promise<AxiosResponse> => axios.post(path, data, getHttpHeaders()),
-  patch: (path: string, data: any): Promise<AxiosResponse> => axios.post(path, data, getHttpHeaders()),
-  del: (path: string): Promise<AxiosResponse> => axios.delete(path, getHttpHeaders())
-}
- 
-export default  client;
+  get: (path: string): Promise<AxiosResponse> =>
+    axios.get(path, getHttpHeaders()),
+  post: (path: string, data: any): Promise<AxiosResponse> =>
+    axios.post(path, data, getHttpHeaders()),
+  put: (path: string, data: any): Promise<AxiosResponse> =>
+    axios.post(path, data, getHttpHeaders()),
+  patch: (path: string, data: any): Promise<AxiosResponse> =>
+    axios.post(path, data, getHttpHeaders()),
+  del: (path: string): Promise<AxiosResponse> =>
+    axios.delete(path, getHttpHeaders()),
+};
+
+export default client;
