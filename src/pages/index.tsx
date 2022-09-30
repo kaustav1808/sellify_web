@@ -1,36 +1,13 @@
 import type { NextPage } from 'next';
 import Main from '@components/layouts/Main';
-import { ReactElement, ReactNode, useEffect, useState } from 'react';
-import Item from '@components/pages/common/Item';
-import { ItemType } from '@customtypes/ui/common';
-import client from 'src/api/client';
+import { ReactElement, ReactNode } from 'react';
+import ItemList from '@components/pages/items/ItemList';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-const Home: NextPageWithLayout = () => {
-  const [items, setItems] = useState<ItemType[]>([]);
-
-  useEffect(() => {
-    client
-      .get('/items')
-      .then((res) => {
-        setItems(res.data.items);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
-  return (
-    <div className="p-4 grid grid-cols-5 gap-2 h-auto">
-      {items.map((item) => (
-        <Item key={item.id} value={item} />
-      ))}
-    </div>
-  );
-};
+const Home: NextPageWithLayout = () => <ItemList type="all" />;
 
 Home.getLayout = function getLayout(page: ReactElement) {
   return <Main>{page}</Main>;

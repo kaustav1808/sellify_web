@@ -16,8 +16,14 @@ export function makeServer() {
       this.urlPrefix = process.env.NEXT_PUBLIC_CLIENT_URL;
       this.namespace = '';
 
-      this.get('/items', (schema) => {
-        return schema.items.all();
+      this.get('/items', (schema, request) => {
+        let items = schema.items.all();
+        if (request.queryParams.type === 'all') return items;
+        items = items.filter(
+          (item) => item.status === request.queryParams.type,
+        );
+
+        return items;
       });
 
       this.post('/items', (schema, request) => {

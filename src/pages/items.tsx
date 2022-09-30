@@ -3,6 +3,8 @@ import Main from '@components/layouts/Main';
 import { ReactElement, ReactNode, useState } from 'react';
 import CreateItem from '@components/pages/items/CreateItem';
 import Tabs from '@components/ui/Tabs';
+import ItemList from '@components/pages/items/ItemList';
+import { getClass } from 'src/services/helpers';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -42,7 +44,35 @@ const Items: NextPageWithLayout = () => {
         </div>
         <CreateItem show={createItem} reset={setCreateItem} />
       </div>
-      <div className="flex"></div>
+      <div className="flex">
+        <div
+          className={getClass({
+            hidden: selectedTab !== 'All',
+            flex: selectedTab === 'All',
+            'flex-col':true
+          })}
+        >
+          <ItemList type="all" />
+        </div>
+        <div
+          className={getClass({
+            hidden: selectedTab !== 'Setteled',
+            flex: selectedTab === 'Setteled',
+            'flex-col':true
+          })}
+        >
+          <ItemList type="setteled" />
+        </div>
+        <div
+          className={getClass({
+            hidden: selectedTab !== 'Open',
+            flex: selectedTab === 'Open',
+            'flex-col':true
+          })}
+        >
+          <ItemList type="open" />
+        </div>
+      </div>
     </div>
   );
 };
