@@ -6,7 +6,7 @@ const run = (server) => {
     let user = {
       id: faker.database.mongodbObjectId(),
       name: faker.name.fullName(),
-      username: faker.unique(faker.name.fullName),
+      username: faker.helpers.unique(faker.name.fullName),
       email: faker.internet.email(),
     };
     server.create('user', user);

@@ -23,7 +23,7 @@ const Auth: NextPage<AuthType> = ({ show = false, reset }) => {
               className="text-sm text-cyan-500 hover:text-blue-800 cursor-pointer"
               onClick={() => setToggleAction('signup')}
             >
-              Don't have a account!
+              Don&apos;t have a account!
             </a>
           ) : (
             <a
