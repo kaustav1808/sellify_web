@@ -4,7 +4,7 @@ import { ItemType } from '@customtypes/ui/common';
 import { ScriptProps } from 'next/script';
 import { getShortDescription, getShortTags } from 'src/services/helpers';
 
-const Item: NextPage<ItemType> = ({ value }: ItemType) => {
+const Item: NextPage<ItemType> = ({ key=undefined,value }: ItemType) => {
   return (
     <div className="max-w-2xl mx-auto">
       <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
