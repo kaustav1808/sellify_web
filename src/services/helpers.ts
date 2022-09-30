@@ -20,7 +20,7 @@ export const getShortTags = (arr: string[]) => {
 };
 
 export const getShortDescription = (str: string) => {
-  if (str.length > 100) {
+  if (str.length > 50) {
     return str.slice(0, 100).concat(`........`);
   } else {
     return str;

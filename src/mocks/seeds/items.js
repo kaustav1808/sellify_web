@@ -9,7 +9,7 @@ const run = (server) => {
     let item = {
       id: faker.database.mongodbObjectId(),
       title: faker.commerce.productName(),
-      shortDescription: faker.commerce.productDescription(),
+      shortDescription: faker.lorem.words(30),
       description: faker.lorem.sentences(10),
       tags: faker.helpers.uniqueArray(
         () => faker.commerce.productAdjective(),

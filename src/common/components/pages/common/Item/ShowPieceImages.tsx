@@ -1,9 +1,13 @@
 import type { NextPage } from 'next';
-
-const ShowPieceImages: NextPage = () => {
+import { ScriptProps } from 'next/script';
+type ImageType = ScriptProps & { width?: number, height?:number };
+const ShowPieceImages: NextPage<ImageType> = ({width=400,height=225}) => {
+  const getImageUrl = () => {
+    return `https://placeimg.com/${width}/${height}/arch`
+  }
   return (
     <figure>
-      <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+      <img src={getImageUrl()} alt="Shoes" />
     </figure>
   );
 };
