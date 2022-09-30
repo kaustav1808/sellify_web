@@ -13,7 +13,7 @@ export type Item = {
 };
 
 export type ItemType = ScriptProps & {
-  key: string|undefined;
+  key: string | undefined;
   value: Item;
 };
 
