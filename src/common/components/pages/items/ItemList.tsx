@@ -23,9 +23,7 @@ const ItemList: NextPage<ItemModalType> = ({ type = 'all' }) => {
 
   return (
     <>
-    <div className='p-4'>
-     {items.length} No of results found
-    </div>
+      <div className="p-4">{items.length} No of results found</div>
       <div className="p-4 grid grid-cols-5 gap-2 h-auto">
         {items.map((item) => (
           <Item key={item.id} value={item} />

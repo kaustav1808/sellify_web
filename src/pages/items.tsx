@@ -49,7 +49,7 @@ const Items: NextPageWithLayout = () => {
           className={getClass({
             hidden: selectedTab !== 'All',
             flex: selectedTab === 'All',
-            'flex-col':true
+            'flex-col': true,
           })}
         >
           <ItemList type="all" />
@@ -58,7 +58,7 @@ const Items: NextPageWithLayout = () => {
           className={getClass({
             hidden: selectedTab !== 'Setteled',
             flex: selectedTab === 'Setteled',
-            'flex-col':true
+            'flex-col': true,
           })}
         >
           <ItemList type="setteled" />
@@ -67,7 +67,7 @@ const Items: NextPageWithLayout = () => {
           className={getClass({
             hidden: selectedTab !== 'Open',
             flex: selectedTab === 'Open',
-            'flex-col':true
+            'flex-col': true,
           })}
         >
           <ItemList type="open" />
