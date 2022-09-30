@@ -22,17 +22,13 @@ const ItemList: NextPage<ItemModalType> = ({ type = 'all' }) => {
   }, []);
 
   const getItems = () => {
-    return items.map((item) => (
-      <Item key={item.id} value={item} />
-    ))
-  }
+    return items.map((item) => <Item key={item.id} value={item} />);
+  };
 
   return (
     <>
       <div className="p-4">{items.length} No of results found</div>
-      <div className="p-4 grid grid-cols-4 gap-2 h-auto">
-        {getItems()}
-      </div>
+      <div className="p-4 grid grid-cols-4 gap-2 h-auto">{getItems()}</div>
     </>
   );
 };
