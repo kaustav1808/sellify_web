@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
 
-const Main: NextPage = ({ user, setAuthUser, children }: any) => {
+const Main = ({ user, setAuthUser, children }: any) => {
   useEffect(() => {
     setAuthUser();
   });
