@@ -26,19 +26,15 @@ const Item: NextPageWithLayout = () => {
     },
   ];
   return (
-    <div className="flex flex-col gap-1 h-full">
-      <div className="p-4 flex gap-2 w-full h-2/3">
-        <div className="w-1/2 max-h-fit h-full">
-          <ImageGallery items={images} />
-        </div>
-        <div className="w-1/2 max-h-fit h-full bg-slate-300"></div>
+    <div className="grid grid-cols-4 gap-1 p-4 h-full overflow-auto">
+      <div className="max-h-fit col-span-2">
+        <ImageGallery items={images} showPlayButton={false} />
       </div>
-      <div className="p-4 flex w-full gap-1 h-1/3">
-        <div className="w-1/4 max-h-fit h-full bg-slate-300"></div>
-        <div className="w-1/4 max-h-fit h-full bg-slate-300"></div>
-        <div className="w-1/4 max-h-fit h-full bg-slate-300"></div>
-        <div className="w-1/4 max-h-fit h-full bg-slate-300"></div>
-      </div>
+      <div className="max-h-fit h-full bg-slate-300 col-span-2"></div>
+      <div className="max-h-fit h-48 bg-slate-300"></div>
+      <div className="max-h-fit h-48 bg-slate-300"></div>
+      <div className="max-h-fit h-48 bg-slate-300"></div>
+      <div className="max-h-fit h-48 bg-slate-300"></div>
     </div>
   );
 };
