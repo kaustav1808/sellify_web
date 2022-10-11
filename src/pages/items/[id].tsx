@@ -32,12 +32,14 @@ const Item: NextPageWithLayout = () => {
     };
   }, [router.query]);
 
-  const images = () => ( [1,2,3,4,5,6,7,8,9].map(()=>{
-    let id = Math.floor(Math.random() * 11)+10+1000; 
-    return{
-      original: `https://picsum.photos/id/${id}/1000/600/`,
-      thumbnail: `https://picsum.photos/id/${id}/250/150/`,
-    }}));
+  const images = () =>
+    [1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => {
+      let id = Math.floor(Math.random() * 11) + 10 + 1000;
+      return {
+        original: `https://picsum.photos/id/${id}/1000/600/`,
+        thumbnail: `https://picsum.photos/id/${id}/250/150/`,
+      };
+    });
   return (
     <div className="grid grid-cols-4 gap-1 p-4 h-full overflow-auto">
       <div className="max-h-fit col-span-2">
