@@ -19,7 +19,7 @@ const ItemList: NextPage<ItemModalType> = ({ type = 'all' }) => {
       .catch((e) => {
         console.log(e);
       });
-  },[]);
+  }, []);
 
   const getItems = () => {
     return items.map((item) => <Item key={item.id} value={item} />);

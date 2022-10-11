@@ -10,7 +10,7 @@ import Head from 'next/head';
 const Main = ({ user, setAuthUser, children }: any) => {
   useEffect(() => {
     setAuthUser();
-  },[]);
+  }, []);
 
   return (
     <div className="h-full">

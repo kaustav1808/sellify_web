@@ -37,7 +37,7 @@ const Navbar: NextPage = ({ user }: any) => {
         <div className="w-1/5">
           <Link href="/">
             <>
-             <Image width={150} height={50} src="/logo.png" alt="No Image" />
+              <Image width={150} height={50} src="/logo.png" alt="No Image" />
             </>
           </Link>
         </div>
