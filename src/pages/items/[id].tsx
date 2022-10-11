@@ -18,8 +18,16 @@ const Item: NextPageWithLayout = () => {
     const { id } = router.query;
     if(id){
       client.get(`/item/${id}`)
-      .then(res=>setItem(res.data.data))
+      .then(res=>{
+        res = res.data.data
+        setItem(res)
+        document.title = `Sellify | ${res.title}`
+      })
       .catch(err=>console.log(err))
+    }
+
+    return () => {
+      document.title = "Sellify"
     }
     
    },[router.query])
