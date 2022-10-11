@@ -4,7 +4,7 @@ import { ItemType } from '@customtypes/ui/common';
 import { getShortDescription, getShortTags } from 'src/services/helpers';
 import Link from 'next/link';
 
-const Item: NextPage<ItemType> = ({ key = undefined, value }: ItemType) => {
+const Item: NextPage<ItemType> = ({ value }: ItemType) => {
   return (
     <div className="max-w-2xl mx-auto">
       <Link href={`/items/${value.id}`} className="cursor-pointer">
