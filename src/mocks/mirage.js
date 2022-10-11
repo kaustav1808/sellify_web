@@ -26,6 +26,13 @@ export function makeServer() {
         return items;
       });
 
+      this.get('/item/:id', (schema, request) => {
+        let items = schema.items.all();
+        items = items.models.filter((item) => item.id === request.params.id);
+
+        return { data: items.length ? items[0] : {} };
+      });
+
       this.post('/items', (schema, request) => {
         const params = JSON.parse(request.requestBody);
         params.status = 'open';
