@@ -12,6 +12,18 @@ export type Item = {
   status: string;
 };
 
+export const DefaultItem = {
+  id: '',
+  status: '',
+  title: '',
+  shortDescription: '',
+  description: '',
+  tags: [],
+  sellType: '',
+  priceMin: 0,
+  priceMax: 0,
+};
+
 export type ItemType = ScriptProps & {
   value: Item;
 };

@@ -1,17 +1,17 @@
 import Main from '@components/layouts/Main';
+import { Item, DefaultItem } from '@customtypes/ui/common';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import ImageGallery from 'react-image-gallery';
 import client from 'src/api/client';
-import { getShortTags } from 'src/services/helpers';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
 const Item: NextPageWithLayout = () => {
-  const [item, setItem] = useState({});
+  const [item, setItem] = useState<Item>(DefaultItem);
   const router = useRouter();
 
   useEffect(() => {
@@ -20,9 +20,9 @@ const Item: NextPageWithLayout = () => {
       client
         .get(`/item/${id}`)
         .then((res) => {
-          res = res.data.data;
-          setItem(res);
-          document.title = `Sellify | ${res.title}`;
+          const response: Item = res.data.data;
+          setItem(response);
+          document.title = `Sellify | ${response.title}`;
         })
         .catch((err) => console.log(err));
     }
