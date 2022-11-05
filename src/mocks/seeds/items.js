@@ -6,7 +6,8 @@ const run = (server) => {
     let sellType = faker.helpers.arrayElement(['range', 'auction']);
     let priceMin = faker.datatype.number({ min: 100, max: 1000 });
     let priceMax = faker.datatype.number({ min: priceMin, max: 10000 });
-    let priceOffset = sellType==='auction'? faker.datatype.number({ min: 1, max: 50 }):0;
+    let priceOffset =
+      sellType === 'auction' ? faker.datatype.number({ min: 1, max: 50 }) : 0;
     let item = {
       id: faker.database.mongodbObjectId(),
       title: faker.commerce.productName(),
@@ -20,7 +21,7 @@ const run = (server) => {
       sellType,
       priceMin,
       priceMax,
-      priceOffset
+      priceOffset,
     };
     server.create('item', item);
   }

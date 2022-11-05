@@ -62,24 +62,25 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
     );
     let priceAuction = (
       <div className="form-control w-1/2">
-      <label className="label">
-        <span className="label-text text-lg">Minimum bid</span>
-      </label>
-      <input
-        type="text"
-        value={state.priceOffset}
-        placeholder="ex: 100"
-        className="input input-bordered input-md w-full max-w-2xl"
-        onChange={(e) => updateState({ priceOffset: e.target.value })}
-      />
-      
-    </div>
+        <label className="label">
+          <span className="label-text text-lg">Minimum bid</span>
+        </label>
+        <input
+          type="text"
+          value={state.priceOffset}
+          placeholder="ex: 100"
+          className="input input-bordered input-md w-full max-w-2xl"
+          onChange={(e) => updateState({ priceOffset: e.target.value })}
+        />
+      </div>
     );
     return (
       <div className="flex max-w-2xl gap-2">
         <div className="form-control w-1/2">
           <label className="label">
-            <span className="label-text text-lg">{state.sellType === 'range' ? 'Minimum Price' : 'Base Price'}</span>
+            <span className="label-text text-lg">
+              {state.sellType === 'range' ? 'Minimum Price' : 'Base Price'}
+            </span>
           </label>
           <input
             type="text"
@@ -175,12 +176,14 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
           </div>
 
           {state.sellType ? priceSection() : ''}
-          {state.sellType === 'auction' ? 
-            <p className='w-full'>
-              (*) Please note the auction will end in 3 days from the time of creation.
-            </p> :
-            ""
-          }
+          {state.sellType === 'auction' ? (
+            <p className="w-full">
+              (*) Please note the auction will end in 3 days from the time of
+              creation.
+            </p>
+          ) : (
+            ''
+          )}
 
           <div className="flex justify-between gap-8">
             <button className="btn btn-error" onClick={() => resetItem(false)}>
