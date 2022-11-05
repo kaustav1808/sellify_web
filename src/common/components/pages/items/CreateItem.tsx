@@ -29,6 +29,7 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
     if (key === 'sellType') {
       params['priceMin'] = 0;
       params['priceMax'] = 0;
+      params['priceOffset'] = 0;
     }
 
     updateState(params);
@@ -59,11 +60,26 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
         />
       </div>
     );
+    let priceAuction = (
+      <div className="form-control w-1/2">
+      <label className="label">
+        <span className="label-text text-lg">Minimum bid</span>
+      </label>
+      <input
+        type="text"
+        value={state.priceOffset}
+        placeholder="ex: 100"
+        className="input input-bordered input-md w-full max-w-2xl"
+        onChange={(e) => updateState({ priceOffset: e.target.value })}
+      />
+      
+    </div>
+    );
     return (
       <div className="flex max-w-2xl gap-2">
         <div className="form-control w-1/2">
           <label className="label">
-            <span className="label-text text-lg">Min Price</span>
+            <span className="label-text text-lg">{state.sellType === 'range' ? 'Minimum Price' : 'Base Price'}</span>
           </label>
           <input
             type="text"
@@ -73,7 +89,7 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
             onChange={(e) => updateState({ priceMin: e.target.value })}
           />
         </div>
-        {state.sellType === 'range' ? priceMax : ''}
+        {state.sellType === 'range' ? priceMax : priceAuction}
       </div>
     );
   };
@@ -149,9 +165,8 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
             </label>
             <SelectBox
               options={[
-                { id: 1, name: 'fixed', label: 'Fixed Price' },
-                { id: 2, name: 'range', label: 'Price range' },
-                { id: 3, name: 'auction', label: 'Auction' },
+                { id: 1, name: 'range', label: 'Price range' },
+                { id: 2, name: 'auction', label: 'Auction' },
               ]}
               onInputChange={(val: Array<number | string>) =>
                 selectedItem(val, 'sellType')
@@ -160,6 +175,12 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
           </div>
 
           {state.sellType ? priceSection() : ''}
+          {state.sellType === 'auction' ? 
+            <p className='w-full'>
+              (*) Please note the auction will end in 3 days from the time of creation.
+            </p> :
+            ""
+          }
 
           <div className="flex justify-between gap-8">
             <button className="btn btn-error" onClick={() => resetItem(false)}>

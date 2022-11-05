@@ -9,6 +9,7 @@ export type Item = {
   sellType: string;
   priceMin: number;
   priceMax: number;
+  priceOffset: number;
   status: string;
 };
 
@@ -22,6 +23,7 @@ export const DefaultItem = {
   sellType: '',
   priceMin: 0,
   priceMax: 0,
+  priceOffset: 0,
 };
 
 export type ItemType = ScriptProps & {
@@ -36,6 +38,7 @@ export type CreateItemType = {
   sellType: string;
   priceMin: number;
   priceMax: number;
+  priceOffset: number;
 };
 
 export const DefaultCreateItem = {
@@ -46,6 +49,7 @@ export const DefaultCreateItem = {
   sellType: '',
   priceMin: 0,
   priceMax: 0,
+  priceOffset: 0,
 };
 
 export type TabsType = ScriptProps & {
