@@ -24,7 +24,7 @@ const run = (server) => {
       priceMax,
       priceOffset,
       createdAt: date,
-      updatedAt: date
+      updatedAt: date,
     };
     server.create('item', item);
   }
