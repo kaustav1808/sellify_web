@@ -3,53 +3,51 @@ import type { NextPage } from 'next';
 import { ItemType } from '@customtypes/ui/common';
 import { getShortDescription, getShortTags } from 'src/services/helpers';
 import Link from 'next/link';
+import style from './items.module.css';
 
 const Item: NextPage<ItemType> = ({ value }: ItemType) => {
   return (
     <div className="max-w-2xl mx-auto">
-      <Link href={`/items/${value.id}`} className="cursor-pointer">
-        <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-80 max-w-sm">
+        <div className="bg-slate-300 shadow-2xl rounded-3xl overflow-hidden">
           <ShowPieceImages />
-
-          <div className="p-5">
-            <a href="#">
-              <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">
-                {value.title}
-              </h5>
-            </a>
-            <div className="card-actions">
-              {getShortTags(value.tags).map((element) => (
-                <div key={element} className="badge badge-success">
-                  {element}
-                </div>
-              ))}
+          <div className="flex flex-col">
+            <h2 className="text-center text-gray-800 text-2xl font-bold pt-2">
+              {value.title}
+            </h2>
+            <div className="w-5/6 m-auto">
+              <p className="text-center text-gray-500 pt-4">
+                {getShortDescription(value.shortDescription)}
+              </p>
             </div>
-            <p className="font-normal text-gray-700 mb-3 dark:text-gray-400">
-              {getShortDescription(value.shortDescription)}
-            </p>
-            <a
-              href="#"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Know more
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                />
-              </svg>
-            </a>
+            <div className="flex items-center w-72 lg:w-5/6 m-auto bg-indigo-50 my-5 p-4 lg:p-4 rounded-2xl">
+              <div className="w-1/5 content-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div className="w-2/5 pt-1">
+                <p className="text-gray-800 font-bold lg:text-sm">Anual Plan</p>
+                <p className="text-gray-500 text-sm">$59.99/year</p>
+              </div>
+              <div className="w-2/5 pt-2">
+                <div className="bg-blue-700 w-72 lg:w-5/6 m-auto mt-2 p-2 hover:bg-indigo-500 rounded-2xl  text-white text-center shadow-xl shadow-bg-blue-700">
+                  <button className=" text-sm font-bold">Place Bid</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };
