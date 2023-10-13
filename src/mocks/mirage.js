@@ -36,7 +36,7 @@ export function makeServer() {
       this.post('/items', (schema, request) => {
         const params = JSON.parse(request.requestBody);
         const date = new Date();
-        params.status = "OPEN";
+        params.status = 'OPEN';
         params.createdAt = date;
         params.updatedAt = date;
         schema.db.items.insert(params);

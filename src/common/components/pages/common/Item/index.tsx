@@ -8,13 +8,12 @@ import { getIcon } from 'react-toastify/dist/components';
 import { useTimer } from 'react-timer-hook';
 
 const Item: NextPage<ItemType> = ({ value }: ItemType) => {
-  const currentDay = new Date(value.created_at)
-  const {
-    seconds,
-    minutes,
-    hours,
-    days,
-  } = useTimer({ autoStart:true, expiryTimestamp:new Date(currentDay.setDate(currentDay.getDate() + 3)), onExpire: () => console.warn('onExpire called') });
+  const currentDay = new Date(value.created_at);
+  const { seconds, minutes, hours, days } = useTimer({
+    autoStart: true,
+    expiryTimestamp: new Date(currentDay.setDate(currentDay.getDate() + 3)),
+    onExpire: () => console.warn('onExpire called'),
+  });
   const geticon = () => {
     if (value.sellType === 'range') {
       return (
@@ -60,7 +59,7 @@ const Item: NextPage<ItemType> = ({ value }: ItemType) => {
           <div className="shadow p-4 rounded-lg bg-slate-300">
             <div className="flex justify-center relative rounded-t-lg overflow-hidden h-52">
               <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-                  <ShowPieceImages/>
+                <ShowPieceImages />
               </div>
 
               <div className="absolute flex justify-center bottom-0 mb-3">
@@ -100,10 +99,15 @@ const Item: NextPage<ItemType> = ({ value }: ItemType) => {
                 </div>
               </div>
 
-              <span className={`absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 ${value.sellType === 'range'? "bg-yellow-500": "bg-red-500"} text-sm font-medium text-white select-none`}>
-              <div style={{fontSize: '20px'}}>
-        <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
-      </div>
+              <span
+                className={`absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 ${
+                  value.sellType === 'range' ? 'bg-yellow-500' : 'bg-red-500'
+                } text-sm font-medium text-white select-none`}
+              >
+                <div style={{ fontSize: '20px' }}>
+                  <span>{days}</span>:<span>{hours}</span>:
+                  <span>{minutes}</span>:<span>{seconds}</span>
+                </div>
               </span>
             </div>
 

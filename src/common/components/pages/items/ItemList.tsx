@@ -22,7 +22,7 @@ const ItemList: NextPage<ItemModalType> = ({ type = 'all' }) => {
   }, []);
 
   const getItems = () => {
-    if(items.length) {
+    if (items.length) {
       return items.map((item) => <Item key={item.id} value={item} />);
     }
   };
