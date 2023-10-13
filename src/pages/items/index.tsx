@@ -5,6 +5,7 @@ import CreateItem from '@components/pages/items/CreateItem';
 import Tabs from '@components/ui/Tabs';
 import ItemList from '@components/pages/items/ItemList';
 import { getClass } from 'src/services/helpers';
+import { ItemConstants } from 'src/constants/ItemConstants';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -19,7 +20,7 @@ const Items: NextPageWithLayout = () => {
       <div className="flex">
         <div className="w-7/12">
           <Tabs
-            list={['All', 'Setteled', 'Open']}
+            list={['All', 'Settled', 'Open']}
             selected={selectedTab}
             changeTab={setSelectedTab}
           />
@@ -56,12 +57,12 @@ const Items: NextPageWithLayout = () => {
         </div>
         <div
           className={getClass({
-            hidden: selectedTab !== 'Setteled',
-            flex: selectedTab === 'Setteled',
+            hidden: selectedTab !== 'Settled',
+            flex: selectedTab === 'Settled',
             'flex-col': true,
           })}
         >
-          <ItemList type="setteled" />
+          <ItemList type={ItemConstants.SETTLED} />
         </div>
         <div
           className={getClass({
@@ -70,7 +71,7 @@ const Items: NextPageWithLayout = () => {
             'flex-col': true,
           })}
         >
-          <ItemList type="open" />
+          <ItemList type={ItemConstants.OPEN} />
         </div>
       </div>
     </div>

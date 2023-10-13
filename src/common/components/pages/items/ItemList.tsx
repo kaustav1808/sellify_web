@@ -14,7 +14,7 @@ const ItemList: NextPage<ItemModalType> = ({ type = 'all' }) => {
     client
       .get(`/items?type=${type}`)
       .then((res) => {
-        setItems(res.data.items);
+        setItems(res.data);
       })
       .catch((e) => {
         console.log(e);
@@ -22,7 +22,9 @@ const ItemList: NextPage<ItemModalType> = ({ type = 'all' }) => {
   }, []);
 
   const getItems = () => {
-    return items.map((item) => <Item key={item.id} value={item} />);
+    if(items.length) {
+      return items.map((item) => <Item key={item.id} value={item} />);
+    }
   };
 
   return (

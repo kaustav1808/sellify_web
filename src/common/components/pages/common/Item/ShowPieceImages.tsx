@@ -6,7 +6,7 @@ const ShowPieceImages: NextPage<ImageType> = ({
   height = 225,
 }) => {
   const getImageUrl = () => {
-    return `https://placeimg.com/${width}/${height}/arch`;
+    return `https://picsum.photos/${width}/${height}`;
   };
   return (
     <figure>
