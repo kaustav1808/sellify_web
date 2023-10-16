@@ -10,7 +10,11 @@ const ShowPieceImages: NextPage<ImageType> = ({
   };
   return (
     <figure>
-      <img src={getImageUrl()} alt="Shoes" className="h-full w-full object-cover" />
+      <img
+        src={getImageUrl()}
+        alt="Shoes"
+        className="h-full w-full object-cover"
+      />
     </figure>
   );
 };

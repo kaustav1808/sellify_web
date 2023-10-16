@@ -27,7 +27,15 @@ export const getShortDescription = (str: string) => {
   }
 };
 
-export const getRandomColor = ()=> {
-  const colorArray = ['primary','secondary','accent','info', 'success', 'warning', 'error']
-  return colorArray[Math.floor(Math.random()*colorArray.length)]
-}
+export const getRandomColor = () => {
+  const colorArray = [
+    'primary',
+    'secondary',
+    'accent',
+    'info',
+    'success',
+    'warning',
+    'error',
+  ];
+  return colorArray[Math.floor(Math.random() * colorArray.length)];
+};

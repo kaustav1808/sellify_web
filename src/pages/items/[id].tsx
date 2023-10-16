@@ -103,7 +103,10 @@ const Item: NextPageWithLayout = () => {
           <div className="flex flex-wrap gap-1">
             {item.tags
               ? item.tags.map((element) => (
-                  <div key={element} className={`badge badge-${getRandomColor()} badge-outline`}>
+                  <div
+                    key={element}
+                    className={`badge badge-${getRandomColor()} badge-outline`}
+                  >
                     {element}
                   </div>
                 ))
