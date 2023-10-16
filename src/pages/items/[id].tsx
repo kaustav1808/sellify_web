@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import ImageGallery from 'react-image-gallery';
 import client from 'src/api/client';
+import { getRandomColor } from 'src/services/helpers';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -18,9 +19,9 @@ const Item: NextPageWithLayout = () => {
     const { id } = router.query;
     if (id) {
       client
-        .get(`/item/${id}`)
+        .get(`/items/${id}`)
         .then((res) => {
-          const response: Item = res.data.data;
+          const response: Item = res.data;
           setItem(response);
           document.title = `Sellify | ${response.title}`;
         })
@@ -39,7 +40,7 @@ const Item: NextPageWithLayout = () => {
           <div key={o} className="max-h-fit h-64 ">
             <div className="card w-full bg-base-100 shadow-xl image-full">
               <figure>
-                <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+                <img src="https://picsum.photos/400/225" alt="Shoes" />
               </figure>
               <div className="card-body">
                 <div>
@@ -54,13 +55,13 @@ const Item: NextPageWithLayout = () => {
           <div key={o} className="max-h-fit h-64 hover:cursor-pointer">
             <div className="card w-full bg-base-100 shadow-xl image-full">
               <figure>
-                <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+                <img src="https://picsum.photos/400/225" alt="Shoes" />
               </figure>
               <div className="card-body">
                 <div className="flex gap-2">
                   <div className="avatar">
                     <div className="w-24 rounded ring ring-success ring-offset-base-100 ring-offset-2">
-                      <img src="https://placeimg.com/192/192/people" />
+                      <img src="https://picsum.photos/200/100" />
                     </div>
                   </div>
                   <div>
@@ -102,7 +103,7 @@ const Item: NextPageWithLayout = () => {
           <div className="flex flex-wrap gap-1">
             {item.tags
               ? item.tags.map((element) => (
-                  <div key={element} className="badge badge-success">
+                  <div key={element} className={`badge badge-${getRandomColor()} badge-outline`}>
                     {element}
                   </div>
                 ))

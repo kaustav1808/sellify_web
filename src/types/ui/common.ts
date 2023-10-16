@@ -26,8 +26,8 @@ export const DefaultItem = {
   priceMin: 0,
   priceMax: 0,
   priceOffset: 0,
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  created_at: new Date(),
+  updated_at: new Date(),
 };
 
 export type ItemType = ScriptProps & {

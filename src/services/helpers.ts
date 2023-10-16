@@ -13,7 +13,7 @@ export const getShortTags = (arr: string[]) => {
     return arr
       .slice(0, 3)
       .map((o) => o)
-      .concat([`+${arr.length - 3}`]);
+      .concat([`+${arr.length - 3} more`]);
   } else {
     return arr.map((o) => o);
   }
@@ -21,8 +21,13 @@ export const getShortTags = (arr: string[]) => {
 
 export const getShortDescription = (str: string) => {
   if (str.length > 50) {
-    return str.slice(0, 100).concat(`........`);
+    return str.slice(0, 50).concat(`........`);
   } else {
     return str;
   }
 };
+
+export const getRandomColor = ()=> {
+  const colorArray = ['primary','secondary','accent','info', 'success', 'warning', 'error']
+  return colorArray[Math.floor(Math.random()*colorArray.length)]
+}
