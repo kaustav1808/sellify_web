@@ -7,6 +7,11 @@ export type Item = {
   description: string;
   tags: string[];
   sellType: string;
+  images: {
+    original: string,
+    thumbnail: string,
+    originalClass ?: string
+  }[];
   priceMin: number;
   priceMax: number;
   priceOffset: number;
@@ -22,6 +27,7 @@ export const DefaultItem = {
   shortDescription: '',
   description: '',
   tags: [],
+  images:[],
   sellType: '',
   priceMin: 0,
   priceMax: 0,

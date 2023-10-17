@@ -79,14 +79,26 @@ const Item: NextPageWithLayout = () => {
     });
   };
 
-  const images = () =>
-    [1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => {
-      let id = Math.floor(Math.random() * 11) + 10 + 1000;
-      return {
-        original: `https://picsum.photos/id/${id}/1000/600/`,
-        thumbnail: `https://picsum.photos/id/${id}/250/150/`,
-      };
-    });
+  const images = () =>{
+    if (item.images.length) {
+      return item.images.map((o) => {
+        return {
+          original: `https://picsum.photos/id/${o.original}`,
+          thumbnail: `https://picsum.photos/id/${o.thumbnail}`,
+          originalClass : "rounded-lg"
+        };
+      });
+    }else {
+      return [
+        {
+          original: `https://picsum.photos/id/100/1000/600`,
+          thumbnail: `https://picsum.photos/id/100/250/150/`,
+          originalClass : "rounded-lg"
+        }
+      ]
+    }
+  }
+    
   return (
     <div className="grid grid-cols-4 gap-1 p-4 h-full overflow-auto">
       <div className="max-h-fit col-span-2">
@@ -103,12 +115,13 @@ const Item: NextPageWithLayout = () => {
           <div className="flex flex-wrap gap-1">
             {item.tags
               ? item.tags.map((element) => (
-                  <div
-                    key={element}
-                    className={`badge badge-${getRandomColor()} badge-outline`}
-                  >
-                    {element}
-                  </div>
+                <div
+                key={item.id + element}
+                className={`flex badge badge-${getRandomColor()} text-black`}
+              >
+                {element}
+              </div>
+
                 ))
               : ''}
           </div>

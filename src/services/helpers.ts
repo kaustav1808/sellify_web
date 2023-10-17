@@ -8,12 +8,12 @@ export const getClass = (obj: any) => {
   return classname;
 };
 
-export const getShortTags = (arr: string[]) => {
-  if (arr.length > 4) {
+export const getShortTags = (arr: string[], offset=4) => {
+  if (arr.length > offset) {
     return arr
-      .slice(0, 3)
+      .slice(0, offset-1)
       .map((o) => o)
-      .concat([`+${arr.length - 3} more`]);
+      .concat([`+${arr.length - offset} more`]);
   } else {
     return arr.map((o) => o);
   }
@@ -29,13 +29,14 @@ export const getShortDescription = (str: string) => {
 
 export const getRandomColor = () => {
   const colorArray = [
-    'primary',
-    'secondary',
-    'accent',
-    'info',
-    'success',
-    'warning',
-    'error',
+    'red',
+    'amber',
+    'lime',
+    'green',
+    'emerald',
+    'teal',
+    'cyan',
+    'sky',
   ];
   return colorArray[Math.floor(Math.random() * colorArray.length)];
 };

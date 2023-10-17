@@ -13,7 +13,7 @@ const Item: NextPage<ItemType> = ({ value }: ItemType) => {
     if (value.sellType === 'RANGE')
       return (
         <>
-          ${value.priceMin}&#8377; - ${value.priceMin}&#8377;
+          {value.priceMin}&#8377; - {value.priceMin }&#8377;
         </>
       );
     else return <>`${value.priceMin}`&#8377;</>;
@@ -45,8 +45,8 @@ const Item: NextPage<ItemType> = ({ value }: ItemType) => {
           <div className="mb-2 flex flex-row h-1/6 gap-2">
             {getShortTags(value.tags).map((element) => (
               <div
-                key={element}
-                className={`badge badge-${getRandomColor()} badge-outline`}
+                key={value.id + element}
+                className={`flex badge badge-${getRandomColor()} text-black`}
               >
                 {element}
               </div>
