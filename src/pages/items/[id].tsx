@@ -79,26 +79,26 @@ const Item: NextPageWithLayout = () => {
     });
   };
 
-  const images = () =>{
+  const images = () => {
     if (item.images.length) {
       return item.images.map((o) => {
         return {
           original: `https://picsum.photos/id/${o.original}`,
           thumbnail: `https://picsum.photos/id/${o.thumbnail}`,
-          originalClass : "rounded-lg"
+          originalClass: 'rounded-lg',
         };
       });
-    }else {
+    } else {
       return [
         {
           original: `https://picsum.photos/id/100/1000/600`,
           thumbnail: `https://picsum.photos/id/100/250/150/`,
-          originalClass : "rounded-lg"
-        }
-      ]
+          originalClass: 'rounded-lg',
+        },
+      ];
     }
-  }
-    
+  };
+
   return (
     <div className="grid grid-cols-4 gap-1 p-4 h-full overflow-auto">
       <div className="max-h-fit col-span-2">
@@ -115,13 +115,12 @@ const Item: NextPageWithLayout = () => {
           <div className="flex flex-wrap gap-1">
             {item.tags
               ? item.tags.map((element) => (
-                <div
-                key={item.id + element}
-                className={`flex badge badge-${getRandomColor()} text-black`}
-              >
-                {element}
-              </div>
-
+                  <div
+                    key={item.id + element}
+                    className={`flex badge badge-${getRandomColor()} text-black`}
+                  >
+                    {element}
+                  </div>
                 ))
               : ''}
           </div>

@@ -8,10 +8,10 @@ export const getClass = (obj: any) => {
   return classname;
 };
 
-export const getShortTags = (arr: string[], offset=4) => {
+export const getShortTags = (arr: string[], offset = 4) => {
   if (arr.length > offset) {
     return arr
-      .slice(0, offset-1)
+      .slice(0, offset - 1)
       .map((o) => o)
       .concat([`+${arr.length - offset} more`]);
   } else {

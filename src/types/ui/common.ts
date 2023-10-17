@@ -8,9 +8,9 @@ export type Item = {
   tags: string[];
   sellType: string;
   images: {
-    original: string,
-    thumbnail: string,
-    originalClass ?: string
+    original: string;
+    thumbnail: string;
+    originalClass?: string;
   }[];
   priceMin: number;
   priceMax: number;
@@ -27,7 +27,7 @@ export const DefaultItem = {
   shortDescription: '',
   description: '',
   tags: [],
-  images:[],
+  images: [],
   sellType: '',
   priceMin: 0,
   priceMax: 0,

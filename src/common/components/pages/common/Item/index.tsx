@@ -13,7 +13,7 @@ const Item: NextPage<ItemType> = ({ value }: ItemType) => {
     if (value.sellType === 'RANGE')
       return (
         <>
-          {value.priceMin}&#8377; - {value.priceMin }&#8377;
+          {value.priceMin}&#8377; - {value.priceMin}&#8377;
         </>
       );
     else return <>`${value.priceMin}`&#8377;</>;
