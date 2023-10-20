@@ -1,5 +1,5 @@
 import Main from '@components/layouts/Main';
-import { Item, DefaultItem } from '@customtypes/ui/common';
+import { Item, DefaultItem } from '@customtypes/business/Item';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { ReactElement, ReactNode, useEffect, useState } from 'react';

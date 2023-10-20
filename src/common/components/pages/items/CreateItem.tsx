@@ -3,14 +3,15 @@ import SelectBox from '@components/ui/SelectBox';
 import { NextPage } from 'next';
 import { ScriptProps } from 'next/script';
 import { useState } from 'react';
-import { CreateItemType, DefaultCreateItem } from '@customtypes/ui/common';
+import { DefaultItem, Item } from '@customtypes/business/Item';
 import client from 'src/api/client';
 import { toast } from 'react-toastify';
+import { ItemConstants } from 'src/constants/ItemConstants';
 
 type ItemModalType = ScriptProps & { show: Boolean; reset: Function };
 
 const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
-  const [state, setState] = useState<CreateItemType>(DefaultCreateItem);
+  const [state, setState] = useState<Item>(DefaultItem);
 
   const updateState = (obj: any) => {
     let curr = state;
@@ -18,7 +19,7 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
   };
 
   let resetItem = (set: boolean = true) => {
-    updateState(DefaultCreateItem);
+    updateState(DefaultItem);
     reset(set);
   };
 
@@ -27,8 +28,8 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
     let params = { [key]: value };
 
     if (key === 'sellType') {
-      params['priceMin'] = 0;
-      params['priceMax'] = 0;
+      params['minPrice'] = 0;
+      params['maxPrice'] = 0;
       params['priceOffset'] = 0;
     }
 
@@ -37,7 +38,18 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
 
   let saveItem = async () => {
     try {
-      await client.post('/items', state);
+      let params:any = {}
+
+      params["title"] = state.title
+      params["description"] = state.description
+      params["shortDescription"] = state.shortDescription
+      params["minPrice"] = state.minPrice
+      params["maxPrice"] = state.maxPrice
+      params["sellType"] = state.sellType
+      if (state.sellType===ItemConstants.AUCTION) params["priceOffset"] = state.priceOffset;
+      params["tags"] = state.tags
+
+      await client.post('/items', params);
       toast.success('Item created Successfully');
       resetItem(false);
     } catch (e) {
@@ -53,10 +65,10 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
         </label>
         <input
           type="text"
-          value={state.priceMax}
+          value={state.maxPrice}
           placeholder="ex: 100"
           className="input input-bordered input-md w-full max-w-2xl"
-          onChange={(e) => updateState({ priceMax: e.target.value })}
+          onChange={(e) => updateState({ maxPrice: e.target.value })}
         />
       </div>
     );
@@ -79,18 +91,18 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
         <div className="form-control w-1/2">
           <label className="label">
             <span className="label-text text-lg">
-              {state.sellType === 'range' ? 'Minimum Price' : 'Base Price'}
+              {state.sellType === ItemConstants.RANGE ? 'Minimum Price' : 'Base Price'}
             </span>
           </label>
           <input
             type="text"
-            value={state.priceMin}
+            value={state.minPrice}
             placeholder="ex: 100"
             className="input input-bordered input-md w-full max-w-2xl"
-            onChange={(e) => updateState({ priceMin: e.target.value })}
+            onChange={(e) => updateState({ minPrice: e.target.value })}
           />
         </div>
-        {state.sellType === 'range' ? priceMax : priceAuction}
+        {state.sellType === ItemConstants.RANGE ? priceMax : priceAuction}
       </div>
     );
   };
@@ -152,7 +164,7 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
                 { id: 2, name: 'wooden chair', label: 'Wooden Chair' },
                 { id: 3, name: 'macbook', label: 'Macbook' },
               ]}
-              value="id"
+              value="name"
               multiple={true}
               onInputChange={(val: Array<number | string>) =>
                 selectedItem(val, 'tags')
@@ -166,9 +178,10 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
             </label>
             <SelectBox
               options={[
-                { id: 1, name: 'range', label: 'Price range' },
-                { id: 2, name: 'auction', label: 'Auction' },
+                { id: 1, name: ItemConstants.RANGE, label: 'Price range' },
+                { id: 2, name: ItemConstants.AUCTION, label: 'Auction' },
               ]}
+              value="name"
               onInputChange={(val: Array<number | string>) =>
                 selectedItem(val, 'sellType')
               }
@@ -176,7 +189,7 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
           </div>
 
           {state.sellType ? priceSection() : ''}
-          {state.sellType === 'auction' ? (
+          {state.sellType === ItemConstants.AUCTION ? (
             <p className="w-full">
               (*) Please note the auction will end in 3 days from the time of
               creation.

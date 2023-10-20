@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { ScriptProps } from 'next/script';
 import { useState, useEffect } from 'react';
 import client from 'src/api/client';
-import { Item as ItemType } from '@customtypes/ui/common';
+import { Item as ItemType } from '@customtypes/business/Item';
 import Item from '../common/Item';
 
 type ItemModalType = ScriptProps & { type: string };

@@ -1,22 +1,26 @@
 import ShowPieceImages from './ShowPieceImages';
 import type { NextPage } from 'next';
-import { ItemType } from '@customtypes/ui/common';
+import { Item as ItemT } from '@customtypes/business/Item';
+import {ItemConstants} from '../../../../../constants/ItemConstants'
 import {
   getRandomColor,
   getShortDescription,
   getShortTags,
 } from 'src/services/helpers';
 import Link from 'next/link';
+import { ScriptProps } from 'next/script';
+
+type ItemType = ScriptProps & { value: ItemT;}
 
 const Item: NextPage<ItemType> = ({ value }: ItemType) => {
   const getPrice = () => {
-    if (value.sellType === 'RANGE')
+    if (value.sellType === ItemConstants.RANGE)
       return (
         <>
-          {value.priceMin}&#8377; - {value.priceMin}&#8377;
+          {value.minPrice}&#8377; - {value.maxPrice}&#8377;
         </>
       );
-    else return <>`${value.priceMin}`&#8377;</>;
+    else return <>`${value.maxPrice}`&#8377;</>;
   };
 
   return (

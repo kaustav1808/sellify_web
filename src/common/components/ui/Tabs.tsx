@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { TabsType, DefaultTabItem } from '@customtypes/ui/common';
+import { TabsType, DefaultTabItem } from '@customtypes/business/Item';
 import { getClass } from 'src/services/helpers';
 
 const Tabs: NextPage<TabsType> = (props: TabsType) => {
