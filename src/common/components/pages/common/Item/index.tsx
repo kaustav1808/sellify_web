@@ -1,7 +1,7 @@
 import ShowPieceImages from './ShowPieceImages';
 import type { NextPage } from 'next';
 import { Item as ItemT } from '@customtypes/business/Item';
-import {ItemConstants} from '../../../../../constants/ItemConstants'
+import { ItemConstants } from '../../../../../constants/ItemConstants';
 import {
   getRandomColor,
   getShortDescription,
@@ -10,7 +10,7 @@ import {
 import Link from 'next/link';
 import { ScriptProps } from 'next/script';
 
-type ItemType = ScriptProps & { value: ItemT;}
+type ItemType = ScriptProps & { value: ItemT };
 
 const Item: NextPage<ItemType> = ({ value }: ItemType) => {
   const getPrice = () => {

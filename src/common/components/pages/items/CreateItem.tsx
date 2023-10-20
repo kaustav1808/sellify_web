@@ -38,16 +38,17 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
 
   let saveItem = async () => {
     try {
-      let params:any = {}
+      let params: any = {};
 
-      params["title"] = state.title
-      params["description"] = state.description
-      params["shortDescription"] = state.shortDescription
-      params["minPrice"] = state.minPrice
-      params["maxPrice"] = state.maxPrice
-      params["sellType"] = state.sellType
-      if (state.sellType===ItemConstants.AUCTION) params["priceOffset"] = state.priceOffset;
-      params["tags"] = state.tags
+      params['title'] = state.title;
+      params['description'] = state.description;
+      params['shortDescription'] = state.shortDescription;
+      params['minPrice'] = state.minPrice;
+      params['maxPrice'] = state.maxPrice;
+      params['sellType'] = state.sellType;
+      if (state.sellType === ItemConstants.AUCTION)
+        params['priceOffset'] = state.priceOffset;
+      params['tags'] = state.tags;
 
       await client.post('/items', params);
       toast.success('Item created Successfully');
@@ -91,7 +92,9 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
         <div className="form-control w-1/2">
           <label className="label">
             <span className="label-text text-lg">
-              {state.sellType === ItemConstants.RANGE ? 'Minimum Price' : 'Base Price'}
+              {state.sellType === ItemConstants.RANGE
+                ? 'Minimum Price'
+                : 'Base Price'}
             </span>
           </label>
           <input
