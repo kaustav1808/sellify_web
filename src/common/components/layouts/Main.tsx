@@ -15,11 +15,11 @@ const Main = ({ user, setAuthUser, children }: any) => {
   return (
     <div className="h-full">
       <Head>
-        <title>Sellify</title>
+        <title>Sell-ify</title>
         <link
           rel="icon"
-          href="https://asset.sell-ify.co.in/logo_icon.png"
-          type="image/x-icon"
+          href="https://asset.sell-ify.co.in/logo_icon_xs.png"
+          type="image/png"
         />
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
