@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import Navbar from '../pages/common/Navbar';
 import { setAuthUser } from '@store/actions/auth';
 import { connect } from 'react-redux';
