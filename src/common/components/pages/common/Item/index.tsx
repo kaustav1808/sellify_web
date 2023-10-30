@@ -58,9 +58,9 @@ const Item: NextPage<ItemType> = ({ value }: ItemType) => {
           </div>
         </div>
         <div className="px-6">
-          
-            <Link href={`/items/${value.id}`}><button className="btn btn-wide btn-info">Buy</button></Link>
-          
+          <Link href={`/items/${value.id}`}>
+            <button className="btn btn-wide btn-info">Buy</button>
+          </Link>
         </div>
       </div>
     </div>

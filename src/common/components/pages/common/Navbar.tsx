@@ -37,7 +37,12 @@ const Navbar: NextPage = ({ user }: any) => {
         <div className="w-1/5">
           <Link href="/">
             <a>
-              <Image width={60} height={60} src="/logo_icon_sm.png" alt="No Image" />
+              <Image
+                width={60}
+                height={60}
+                src="/logo_icon_sm.png"
+                alt="No Image"
+              />
             </a>
           </Link>
         </div>
