@@ -37,7 +37,7 @@ export const signUp =
 
 export const setAuthUser = () => (dispatch: any) => {
   client
-    .get('/user')
+    .get('/users')
     .then((res) => {
       dispatch({
         type: t.SET_AUTH_USER,

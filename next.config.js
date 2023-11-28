@@ -5,4 +5,5 @@ module.exports = {
     loader: 'imgix',
     path: 'https://asset.sell-ify.co.in',
   },
+  trailingSlash: true,
 }

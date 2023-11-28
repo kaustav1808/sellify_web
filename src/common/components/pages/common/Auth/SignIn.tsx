@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 
 const SignIn: NextPage = ({ signIn }: any) => {
-  const [user, setUser] = useState({ email: '', username: '', password: '' });
+  const [user, setUser] = useState({ email: '', password: '' });
 
   const updateUser = (e: any) => {
     let key = e.target.id;

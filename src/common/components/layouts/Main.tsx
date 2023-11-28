@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import Navbar from '../pages/common/Navbar';
 import { setAuthUser } from '@store/actions/auth';
 import { connect } from 'react-redux';
@@ -7,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
 
-const Main: NextPage = ({ user, setAuthUser, children }: any) => {
+const Main = ({ user, setAuthUser, children }: any) => {
   useEffect(() => {
     setAuthUser();
   }, []);
@@ -15,16 +14,22 @@ const Main: NextPage = ({ user, setAuthUser, children }: any) => {
   return (
     <div className="h-full">
       <Head>
-        <title>Sellify</title>
+        <title>Sell-ify</title>
         <link
           rel="icon"
-          href="https://asset.sell-ify.co.in/logo_icon.png"
-          type="image/x-icon"
+          href="https://asset.sell-ify.co.in/logo_icon_xs.png"
+          type="image/png"
         />
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Navbar />
+      <div className="flex flex-col h-full">
+        <Navbar />
+        <div className="h-[95%] bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r overflow-auto">
+          {children}
+        </div>
+      </div>
+
       <ToastContainer
         position="bottom-right"
         theme="dark"
@@ -37,9 +42,6 @@ const Main: NextPage = ({ user, setAuthUser, children }: any) => {
         draggable
         pauseOnHover
       />
-      <div className="h-full bg-gradient-to-b from-gray-900 to-gray-600 bg-gradient-to-r">
-        {children}
-      </div>
     </div>
   );
 };

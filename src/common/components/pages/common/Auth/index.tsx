@@ -2,6 +2,7 @@ import Modal from '@components/ui/Modal';
 import { NextPage } from 'next';
 import { Props, ScriptProps } from 'next/script';
 import { useState } from 'react';
+import Image from 'next/image';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
@@ -15,19 +16,20 @@ const Auth: NextPage<AuthType> = ({ show = false, reset }) => {
       <div className="flex hero min-h-auto max-w-auto bg-base-200">
         {toggleAction == 'signin' ? <SignIn /> : <SignUp />}
         <div className="flex flex-col gap-2 text-center lg:text-left">
-          <h1 className="text-4xl font-bold">
+          <Image width={500} height={500} src="/logo.png" alt="No Image" />
+          <h1 className="text-4xl font-bold text-center">
             {toggleAction == 'signin' ? 'Sign In' : 'Sign Up'}
           </h1>
           {toggleAction == 'signin' ? (
             <a
-              className="text-sm text-cyan-500 hover:text-blue-800 cursor-pointer"
+              className="text-sm text-cyan-500 hover:text-blue-800 cursor-pointer text-center"
               onClick={() => setToggleAction('signup')}
             >
-              Don't have a account!
+              Don&apos;t have a account!
             </a>
           ) : (
             <a
-              className="text-sm text-cyan-500 hover:text-blue-800 cursor-pointer"
+              className="text-sm text-cyan-500 hover:text-blue-800 cursor-pointer text-center"
               onClick={() => setToggleAction('signin')}
             >
               Already have an account!
