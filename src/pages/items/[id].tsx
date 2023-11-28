@@ -6,7 +6,10 @@ import { useRouter } from 'next/router';
 import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import ImageGallery from 'react-image-gallery';
 import client from 'src/api/client';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getRandomColor } from 'src/services/helpers';
+import { faFilePen, faBoxesPacking } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -114,16 +117,13 @@ const Item: NextPageWithLayout = () => {
             <KebabMenu>
               <>
                 <li>
-                  <a href="http://www.g.com">Art</a>
+                  <a><FontAwesomeIcon icon={faFilePen} width='20' height="20"/> Edit Item</a>
                 </li>
                 <li>
-                  <a href="http://www.g.com">Coding</a>
+                  <a><FontAwesomeIcon icon={faTrashCan} width='20' height="20"/> Delete Item</a>
                 </li>
                 <li>
-                  <a href="http://www.g.com">Design</a>
-                </li>
-                <li>
-                  <a href="http://www.g.com">Web Development</a>
+                  <a><FontAwesomeIcon icon={faBoxesPacking} width='20' height="20"/> Archive Item</a>
                 </li>
               </>
             </KebabMenu>
