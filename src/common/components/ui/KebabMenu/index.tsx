@@ -5,10 +5,10 @@ import { ReactElement, useRef } from 'react';
 const KebabMenu: NextPage<{ children: ReactElement }> = (props: {
   children: ReactElement;
 }) => {
-  const kebab = useRef(null);
-  const middle = useRef(null);
-  const cross = useRef(null);
-  const dropdown = useRef(null);
+  const kebab = useRef<HTMLDivElement>(null);
+  const middle = useRef<HTMLElement>(null);
+  const cross = useRef<HTMLParagraphElement>(null);
+  const dropdown = useRef<HTMLDivElement>(null);
 
   const onButtonClick = () => {
     if (middle.current)
