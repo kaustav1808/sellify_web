@@ -2,6 +2,10 @@ import type { NextPage } from 'next';
 import Main from '@components/layouts/Main';
 import { ReactElement, ReactNode, useState } from 'react';
 import CreateItem from '@components/pages/items/CreateItem';
+import Tabs from '@components/ui/Tabs';
+import ItemList from '@components/pages/items/ItemList';
+import { getClass } from 'src/services/helpers';
+import { ItemConstants } from 'src/constants/ItemConstants';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -9,14 +13,20 @@ type NextPageWithLayout = NextPage & {
 
 const Items: NextPageWithLayout = () => {
   const [createItem, setCreateItem] = useState(false);
+  const [selectedTab, setSelectedTab] = useState('All');
+
   return (
     <div className="w-full h-inherit p-4">
       <div className="flex">
-        <div className="tabs w-11/12">
-          <a className="tab tab-lg tab-bordered">All</a>
-          <a className="tab tab-lg tab-bordered tab-active">Setteled</a>
-          <a className="tab tab-lg tab-bordered">Closed</a>
+        <div className="w-7/12">
+          <Tabs
+            list={['All', 'Settled', 'Open']}
+            selected={selectedTab}
+            changeTab={setSelectedTab}
+          />
         </div>
+        <div className="w-4/12"></div>
+
         <div className="w-1/12">
           <button
             className="btn btn-active"
@@ -34,6 +44,35 @@ const Items: NextPageWithLayout = () => {
           </button>
         </div>
         <CreateItem show={createItem} reset={setCreateItem} />
+      </div>
+      <div className="flex">
+        <div
+          className={getClass({
+            hidden: selectedTab !== 'All',
+            flex: selectedTab === 'All',
+            'flex-col': true,
+          })}
+        >
+          <ItemList type="all" />
+        </div>
+        <div
+          className={getClass({
+            hidden: selectedTab !== 'Settled',
+            flex: selectedTab === 'Settled',
+            'flex-col': true,
+          })}
+        >
+          <ItemList type={ItemConstants.SETTLED} />
+        </div>
+        <div
+          className={getClass({
+            hidden: selectedTab !== 'Open',
+            flex: selectedTab === 'Open',
+            'flex-col': true,
+          })}
+        >
+          <ItemList type={ItemConstants.OPEN} />
+        </div>
       </div>
     </div>
   );

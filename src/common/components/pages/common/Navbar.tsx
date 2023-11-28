@@ -32,11 +32,18 @@ const Navbar: NextPage = ({ user }: any) => {
   }, [user]);
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 h-[5%]">
       <div className="flex w-full gap-8">
         <div className="w-1/5">
           <Link href="/">
-            <Image width={150} height={50} src="/logo.png" alt="No Image" />
+            <a>
+              <Image
+                width={60}
+                height={60}
+                src="/logo_icon_sm.png"
+                alt="No Image"
+              />
+            </a>
           </Link>
         </div>
 

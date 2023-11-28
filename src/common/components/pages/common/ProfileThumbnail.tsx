@@ -8,7 +8,7 @@ const ProfileThumbnail: NextPage = (props: any) => {
     <div className="dropdown dropdown-left">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
-          <img src="https://api.lorem.space/image/face?hash=33791" />
+          <img src="https://api.lorem.space/image/face?hash=33791" alt="pics" />
         </div>
       </label>
       <ul
