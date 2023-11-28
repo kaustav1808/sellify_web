@@ -107,20 +107,27 @@ const Item: NextPageWithLayout = () => {
       </div>
       <div className="max-h-fit h-full col-span-2">
         <div className="flex flex-col px-2 gap-2">
-          <div className='flex justify-between'>
-          <div className="text-4xl text-white text-left underline decoration-1 underline-offset-2 font-sans">
-            {item.title || ''}
+          <div className="flex justify-between">
+            <div className="text-4xl text-white text-left underline decoration-1 underline-offset-2 font-sans">
+              {item.title || ''}
+            </div>
+            <KebabMenu>
+              <>
+                <li>
+                  <a href="http://www.g.com">Art</a>
+                </li>
+                <li>
+                  <a href="http://www.g.com">Coding</a>
+                </li>
+                <li>
+                  <a href="http://www.g.com">Design</a>
+                </li>
+                <li>
+                  <a href="http://www.g.com">Web Development</a>
+                </li>
+              </>
+            </KebabMenu>
           </div>
-          <KebabMenu>
-            <>
-            <li ><a href="http://www.g.com">Art</a></li>
-            <li ><a href="http://www.g.com">Coding</a></li>
-      <li ><a href="http://www.g.com">Design</a></li>
-      <li ><a href="http://www.g.com">Web Development</a></li>
-            </>
-          </KebabMenu>
-          </div>
-
 
           <div className="text-sm text-slate-300 text-left font-sans">
             {item.shortDescription || ''}
