@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getRandomColor } from 'src/services/helpers';
 import { faFilePen, faBoxesPacking } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import ItemOperation from '@components/pages/items/ItemOperation';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -17,6 +18,7 @@ type NextPageWithLayout = NextPage & {
 
 const Item: NextPageWithLayout = () => {
   const [item, setItem] = useState<Item>(DefaultItem);
+  const [editItem, setEditItem] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -104,7 +106,8 @@ const Item: NextPageWithLayout = () => {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-1 p-4 h-full overflow-auto">
+    <>
+      <div className="grid grid-cols-4 gap-1 p-4 h-full overflow-auto">
       <div className="max-h-fit col-span-2">
         <ImageGallery items={images()} showPlayButton={false} />
       </div>
@@ -117,7 +120,7 @@ const Item: NextPageWithLayout = () => {
             <KebabMenu>
               <>
                 <li>
-                  <a>
+                  <a onClick={() => setEditItem(true)}>
                     <FontAwesomeIcon icon={faFilePen} width="20" height="20" />{' '}
                     Edit Item
                   </a>
@@ -166,6 +169,10 @@ const Item: NextPageWithLayout = () => {
         <div className="grid grid-cols-4 gap-2">{getShortBids()}</div>
       </div>
     </div>
+
+    <ItemOperation show={editItem} reset={setEditItem} item={item}/>
+    </>
+    
   );
 };
 
