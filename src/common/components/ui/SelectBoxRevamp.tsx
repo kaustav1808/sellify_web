@@ -8,23 +8,29 @@ const SelectBoxRevamp: NextPage<SelectType> = ({
   onInputChange,
   unique = 'id',
   label = 'name',
-  selected = []
+  selected = [],
 }: SelectType) => {
   const [state, setState] = useState<StateType>({
     selected: [],
     opened: false,
   });
 
-  useEffect(()=>{
-    if(selected) {
-      let updatedSelec = Array.isArray(selected) ?
-        selected.map((o: any)=>({label:typeof o === 'object'? o[unique] : o,unique:typeof o === 'object'? o[label] : o}))
-        : [{label:selected,unique:selected}]
-      updateState({selected:updatedSelec})
+  useEffect(() => {
+    if (selected) {
+      let updatedSelec = Array.isArray(selected)
+        ? selected.map((o: any) => ({
+            label: typeof o === 'object' ? o[unique] : o,
+            unique: typeof o === 'object' ? o[label] : o,
+          }))
+        : [{ label: selected, unique: selected }];
+      updateState({ selected: updatedSelec });
     }
-  },[selected])
+  }, [selected]);
 
-  let tranOpt:OptionType[] = options.map((o: any)=>({label:typeof o === 'object'? o[unique] : o,unique:typeof o === 'object'? o[label] : o}))
+  let tranOpt: OptionType[] = options.map((o: any) => ({
+    label: typeof o === 'object' ? o[unique] : o,
+    unique: typeof o === 'object' ? o[label] : o,
+  }));
 
   const updateState = (obj: any) => {
     const curr = state;
@@ -43,9 +49,7 @@ const SelectBoxRevamp: NextPage<SelectType> = ({
       unique,
     };
 
-    let checkIfExists = curr.filter(
-      (o: any) => o.unique == unique,
-    ).length;
+    let checkIfExists = curr.filter((o: any) => o.unique == unique).length;
 
     if (checkIfExists) {
       returnSelected(curr);
@@ -67,10 +71,12 @@ const SelectBoxRevamp: NextPage<SelectType> = ({
     onInputChange(selectedValues);
   };
 
-  const removeItem = (e: any, key: Key|null|undefined) => {
+  const removeItem = (e: any, key: Key | null | undefined) => {
     e.stopPropagation();
     let curr = state.selected;
-    curr = curr.filter((o: { unique: Key|null|undefined }) => key !== o.unique);
+    curr = curr.filter(
+      (o: { unique: Key | null | undefined }) => key !== o.unique,
+    );
     returnSelected(curr);
     updateState({ selected: curr });
   };
@@ -102,7 +108,6 @@ const SelectBoxRevamp: NextPage<SelectType> = ({
   };
 
   const renderOptions = () => {
-    
     return (
       <ul
         tabIndex={0}
@@ -112,13 +117,8 @@ const SelectBoxRevamp: NextPage<SelectType> = ({
           <label>Select An Option</label>
         </li>
         {tranOpt.map((o: any) => (
-          <li
-            key={o.unique}
-            onClick={(e) => selectOption(e, o)}
-          >
-            <label id={o.unique}>
-              {o.label}{' '}
-            </label>
+          <li key={o.unique} onClick={(e) => selectOption(e, o)}>
+            <label id={o.unique}>{o.label} </label>
           </li>
         ))}
       </ul>

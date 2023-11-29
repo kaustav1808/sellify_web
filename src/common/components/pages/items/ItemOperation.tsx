@@ -8,9 +8,17 @@ import client from 'src/api/client';
 import { toast } from 'react-toastify';
 import { ItemConstants } from 'src/constants/ItemConstants';
 
-type ItemModalType = ScriptProps & { show: Boolean; reset: Function, item?: null|Item };
+type ItemModalType = ScriptProps & {
+  show: Boolean;
+  reset: Function;
+  item?: null | Item;
+};
 
-const ItemOperation: NextPage<ItemModalType> = ({ show = false, reset, item }) => {
+const ItemOperation: NextPage<ItemModalType> = ({
+  show = false,
+  reset,
+  item,
+}) => {
   const [state, setState] = useState<Item>(DefaultItem);
 
   useEffect(() => {
@@ -119,7 +127,9 @@ const ItemOperation: NextPage<ItemModalType> = ({ show = false, reset, item }) =
   return (
     <Modal show={show} resetModal={() => resetItem(false)} width="2xl">
       <>
-        <label className="text-2xl">{item && item?.id ? "Update ".concat(item.title) : "Create an Item" }</label>
+        <label className="text-2xl">
+          {item && item?.id ? 'Update '.concat(item.title) : 'Create an Item'}
+        </label>
         <div className="divider"></div>
 
         <div className="flex flex-col gap-2">
@@ -168,7 +178,7 @@ const ItemOperation: NextPage<ItemModalType> = ({ show = false, reset, item }) =
               <span className="label-text text-lg">Tags</span>
             </label>
             <SelectBoxRevamp
-              options={['Book','Wooden Chair', 'Macbook']}
+              options={['Book', 'Wooden Chair', 'Macbook']}
               selected={state.tags}
               multiple={true}
               onInputChange={(val: Array<number | string>) =>
@@ -182,7 +192,7 @@ const ItemOperation: NextPage<ItemModalType> = ({ show = false, reset, item }) =
               <span className="label-text text-lg">Sell Type</span>
             </label>
             <SelectBoxRevamp
-              options={[ItemConstants.RANGE,ItemConstants.AUCTION]}
+              options={[ItemConstants.RANGE, ItemConstants.AUCTION]}
               selected={state.sellType}
               onInputChange={(val: Array<number | string>) =>
                 selectedItem(val, 'sellType')

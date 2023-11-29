@@ -108,71 +108,78 @@ const Item: NextPageWithLayout = () => {
   return (
     <>
       <div className="grid grid-cols-4 gap-1 p-4 h-full overflow-auto">
-      <div className="max-h-fit col-span-2">
-        <ImageGallery items={images()} showPlayButton={false} />
-      </div>
-      <div className="max-h-fit h-full col-span-2">
-        <div className="flex flex-col px-2 gap-2">
-          <div className="flex justify-between">
-            <div className="text-4xl text-white text-left underline decoration-1 underline-offset-2 font-sans">
-              {item.title || ''}
+        <div className="max-h-fit col-span-2">
+          <ImageGallery items={images()} showPlayButton={false} />
+        </div>
+        <div className="max-h-fit h-full col-span-2">
+          <div className="flex flex-col px-2 gap-2">
+            <div className="flex justify-between">
+              <div className="text-4xl text-white text-left underline decoration-1 underline-offset-2 font-sans">
+                {item.title || ''}
+              </div>
+              <KebabMenu>
+                <>
+                  <li>
+                    <a onClick={() => setEditItem(true)}>
+                      <FontAwesomeIcon
+                        icon={faFilePen}
+                        width="20"
+                        height="20"
+                      />{' '}
+                      Edit Item
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <FontAwesomeIcon
+                        icon={faTrashCan}
+                        width="20"
+                        height="20"
+                      />{' '}
+                      Delete Item
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <FontAwesomeIcon
+                        icon={faBoxesPacking}
+                        width="20"
+                        height="20"
+                      />{' '}
+                      Archive Item
+                    </a>
+                  </li>
+                </>
+              </KebabMenu>
             </div>
-            <KebabMenu>
-              <>
-                <li>
-                  <a onClick={() => setEditItem(true)}>
-                    <FontAwesomeIcon icon={faFilePen} width="20" height="20" />{' '}
-                    Edit Item
-                  </a>
-                </li>
-                <li>
-                  <a>
-                    <FontAwesomeIcon icon={faTrashCan} width="20" height="20" />{' '}
-                    Delete Item
-                  </a>
-                </li>
-                <li>
-                  <a>
-                    <FontAwesomeIcon
-                      icon={faBoxesPacking}
-                      width="20"
-                      height="20"
-                    />{' '}
-                    Archive Item
-                  </a>
-                </li>
-              </>
-            </KebabMenu>
-          </div>
 
-          <div className="text-sm text-slate-300 text-left font-sans">
-            {item.shortDescription || ''}
-          </div>
-          <div className="flex flex-wrap gap-1">
-            {item.tags
-              ? item.tags.map((element) => (
-                  <div
-                    key={item.id + element}
-                    className={`flex badge badge-${getRandomColor()} text-black`}
-                  >
-                    {element}
-                  </div>
-                ))
-              : ''}
-          </div>
-          <div className="text-lg text-slate-100 text-left font-sans">
-            {item.description || ''}
+            <div className="text-sm text-slate-300 text-left font-sans">
+              {item.shortDescription || ''}
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {item.tags
+                ? item.tags.map((element) => (
+                    <div
+                      key={item.id + element}
+                      className={`flex badge badge-${getRandomColor()} text-black`}
+                    >
+                      {element}
+                    </div>
+                  ))
+                : ''}
+            </div>
+            <div className="text-lg text-slate-100 text-left font-sans">
+              {item.description || ''}
+            </div>
           </div>
         </div>
+        <div className="col-span-4">
+          <div className="grid grid-cols-4 gap-2">{getShortBids()}</div>
+        </div>
       </div>
-      <div className="col-span-4">
-        <div className="grid grid-cols-4 gap-2">{getShortBids()}</div>
-      </div>
-    </div>
 
-    <ItemOperation show={editItem} reset={setEditItem} item={item}/>
+      <ItemOperation show={editItem} reset={setEditItem} item={item} />
     </>
-    
   );
 };
 
