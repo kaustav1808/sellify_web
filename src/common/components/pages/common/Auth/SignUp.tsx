@@ -2,6 +2,9 @@ import { NextPage } from 'next';
 import { connect } from 'react-redux';
 import { signUp } from '@store/actions/auth';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import PasswordInput from '@components/ui/PasswordInput';
 
 const SignUp: NextPage = (props: any) => {
   const [user, setUser] = useState({ email: '', username: '', password: '' });
@@ -41,19 +44,7 @@ const SignUp: NextPage = (props: any) => {
               className="input input-bordered"
             />
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Password</span>
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="password"
-              value={user.password}
-              onChange={updateUser}
-              className="input input-bordered"
-            />
-          </div>
+          <PasswordInput value={user.password} onValueChange={updateUser} />
           <div className="form-control mt-6">
             <button
               className="btn btn-primary"
