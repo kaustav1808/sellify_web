@@ -13,7 +13,7 @@ type ItemModalType = ScriptProps & {
   show: Boolean;
   reset: Function;
   item?: null | Item;
-  onUpdate?:Function
+  onUpdate?: Function;
 };
 
 const ItemOperation: NextPage<ItemModalType> = ({
@@ -91,15 +91,15 @@ const ItemOperation: NextPage<ItemModalType> = ({
 
       const res = await client.put('/items/'.concat(state.id || ''), params);
       toast.success('Item updated Successfully');
-      console.log(res)
-      if(onUpdate) {
-        onUpdate(res.data)
+      console.log(res);
+      if (onUpdate) {
+        onUpdate(res.data);
       }
 
       resetItem(false);
-    } catch (e:any) {
+    } catch (e: any) {
       if (e.response.data.code === ResponseCode.SLFY_VALIDATION_ERROR) {
-        e.response.data.errors.forEach((element:{message:string}) => {
+        e.response.data.errors.forEach((element: { message: string }) => {
           toast.error(element.message);
         });
       }
@@ -249,14 +249,15 @@ const ItemOperation: NextPage<ItemModalType> = ({
               CANCEL
             </button>
 
-            { item && item.id ? 
-            <button className="btn btn-primary" onClick={updateItem}>
-              UPDATE
-            </button> :
-            <button className="btn btn-success" onClick={saveItem}>
-            SAVE
-          </button>
-            }
+            {item && item.id ? (
+              <button className="btn btn-primary" onClick={updateItem}>
+                UPDATE
+              </button>
+            ) : (
+              <button className="btn btn-success" onClick={saveItem}>
+                SAVE
+              </button>
+            )}
           </div>
         </div>
       </>

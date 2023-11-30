@@ -17,7 +17,7 @@ type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-const Item: NextPageWithLayout = ({ user}: any) => {
+const Item: NextPageWithLayout = ({ user }: any) => {
   const [item, setItem] = useState<Item>(DefaultItem);
   const [editItem, setEditItem] = useState(false);
   const router = useRouter();
@@ -118,43 +118,44 @@ const Item: NextPageWithLayout = ({ user}: any) => {
               <div className="text-4xl text-white text-left underline decoration-1 underline-offset-2 font-sans">
                 {item.title || ''}
               </div>
-              {
-                checkValidItemUser(user,item) ? <KebabMenu>
-                <>
-                  <li>
-                    <a onClick={() => setEditItem(true)}>
-                      <FontAwesomeIcon
-                        icon={faFilePen}
-                        width="20"
-                        height="20"
-                      />{' '}
-                      Edit Item
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <FontAwesomeIcon
-                        icon={faTrashCan}
-                        width="20"
-                        height="20"
-                      />{' '}
-                      Delete Item
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <FontAwesomeIcon
-                        icon={faBoxesPacking}
-                        width="20"
-                        height="20"
-                      />{' '}
-                      Archive Item
-                    </a>
-                  </li>
-                </>
-              </KebabMenu>: ''
-              }
-              
+              {checkValidItemUser(user, item) ? (
+                <KebabMenu>
+                  <>
+                    <li>
+                      <a onClick={() => setEditItem(true)}>
+                        <FontAwesomeIcon
+                          icon={faFilePen}
+                          width="20"
+                          height="20"
+                        />{' '}
+                        Edit Item
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <FontAwesomeIcon
+                          icon={faTrashCan}
+                          width="20"
+                          height="20"
+                        />{' '}
+                        Delete Item
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <FontAwesomeIcon
+                          icon={faBoxesPacking}
+                          width="20"
+                          height="20"
+                        />{' '}
+                        Archive Item
+                      </a>
+                    </li>
+                  </>
+                </KebabMenu>
+              ) : (
+                ''
+              )}
             </div>
 
             <div className="text-sm text-slate-300 text-left font-sans">
@@ -182,7 +183,12 @@ const Item: NextPageWithLayout = ({ user}: any) => {
         </div>
       </div>
 
-      <ItemOperation show={editItem} reset={setEditItem} item={item} onUpdate={(item:Item)=>setItem(item)} />
+      <ItemOperation
+        show={editItem}
+        reset={setEditItem}
+        item={item}
+        onUpdate={(item: Item) => setItem(item)}
+      />
     </>
   );
 };
@@ -191,6 +197,6 @@ Item.getLayout = function getLayout(page: ReactElement) {
   return <Main>{page}</Main>;
 };
 
-const mapStateToProps = (state:any) => ({user:state.user})
+const mapStateToProps = (state: any) => ({ user: state.user });
 
 export default connect(mapStateToProps)(Item);
