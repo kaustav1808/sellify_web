@@ -7,16 +7,19 @@ import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import ImageGallery from 'react-image-gallery';
 import client from 'src/api/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getRandomColor } from 'src/services/helpers';
+import { checkValidItemUser, getRandomColor } from 'src/services/helpers';
 import { faFilePen, faBoxesPacking } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import ItemOperation from '@components/pages/items/ItemOperation';
+import { connect } from 'react-redux';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-const Item: NextPageWithLayout = () => {
+const Item: NextPageWithLayout = ({ user }: any) => {
   const [item, setItem] = useState<Item>(DefaultItem);
+  const [editItem, setEditItem] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -104,68 +107,89 @@ const Item: NextPageWithLayout = () => {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-1 p-4 h-full overflow-auto">
-      <div className="max-h-fit col-span-2">
-        <ImageGallery items={images()} showPlayButton={false} />
-      </div>
-      <div className="max-h-fit h-full col-span-2">
-        <div className="flex flex-col px-2 gap-2">
-          <div className="flex justify-between">
-            <div className="text-4xl text-white text-left underline decoration-1 underline-offset-2 font-sans">
-              {item.title || ''}
+    <>
+      <div className="grid grid-cols-4 gap-1 p-4 h-full overflow-auto">
+        <div className="max-h-fit col-span-2">
+          <ImageGallery items={images()} showPlayButton={false} />
+        </div>
+        <div className="max-h-fit h-full col-span-2">
+          <div className="flex flex-col px-2 gap-2">
+            <div className="flex justify-between">
+              <div className="text-4xl text-white text-left underline decoration-1 underline-offset-2 font-sans">
+                {item.title || ''}
+              </div>
+              {checkValidItemUser(user, item) ? (
+                <KebabMenu>
+                  <>
+                    <li>
+                      <a onClick={() => setEditItem(true)}>
+                        <FontAwesomeIcon
+                          icon={faFilePen}
+                          width="20"
+                          height="20"
+                        />{' '}
+                        Edit Item
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <FontAwesomeIcon
+                          icon={faTrashCan}
+                          width="20"
+                          height="20"
+                        />{' '}
+                        Delete Item
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <FontAwesomeIcon
+                          icon={faBoxesPacking}
+                          width="20"
+                          height="20"
+                        />{' '}
+                        Archive Item
+                      </a>
+                    </li>
+                  </>
+                </KebabMenu>
+              ) : (
+                ''
+              )}
             </div>
-            <KebabMenu>
-              <>
-                <li>
-                  <a>
-                    <FontAwesomeIcon icon={faFilePen} width="20" height="20" />{' '}
-                    Edit Item
-                  </a>
-                </li>
-                <li>
-                  <a>
-                    <FontAwesomeIcon icon={faTrashCan} width="20" height="20" />{' '}
-                    Delete Item
-                  </a>
-                </li>
-                <li>
-                  <a>
-                    <FontAwesomeIcon
-                      icon={faBoxesPacking}
-                      width="20"
-                      height="20"
-                    />{' '}
-                    Archive Item
-                  </a>
-                </li>
-              </>
-            </KebabMenu>
-          </div>
 
-          <div className="text-sm text-slate-300 text-left font-sans">
-            {item.shortDescription || ''}
-          </div>
-          <div className="flex flex-wrap gap-1">
-            {item.tags
-              ? item.tags.map((element) => (
-                  <div
-                    key={item.id + element}
-                    className={`flex badge badge-${getRandomColor()} text-black`}
-                  >
-                    {element}
-                  </div>
-                ))
-              : ''}
-          </div>
-          <div className="text-lg text-slate-100 text-left font-sans">
-            {item.description || ''}
+            <div className="text-sm text-slate-300 text-left font-sans">
+              {item.shortDescription || ''}
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {item.tags
+                ? item.tags.map((element) => (
+                    <div
+                      key={item.id + element}
+                      className={`flex badge badge-${getRandomColor()} text-black`}
+                    >
+                      {element}
+                    </div>
+                  ))
+                : ''}
+            </div>
+            <div className="text-lg text-slate-100 text-left font-sans">
+              {item.description || ''}
+            </div>
           </div>
         </div>
+        <div className="col-span-4">
+          <div className="grid grid-cols-4 gap-2">{getShortBids()}</div>
+        </div>
       </div>
-      <div className="col-span-4">
-        <div className="grid grid-cols-4 gap-2">{getShortBids()}</div>
-      </div>
-    </div>
+
+      <ItemOperation
+        show={editItem}
+        reset={setEditItem}
+        item={item}
+        onUpdate={(item: Item) => setItem(item)}
+      />
+    </>
   );
 };
 
@@ -173,4 +197,6 @@ Item.getLayout = function getLayout(page: ReactElement) {
   return <Main>{page}</Main>;
 };
 
-export default Item;
+const mapStateToProps = (state: any) => ({ user: state.user });
+
+export default connect(mapStateToProps)(Item);

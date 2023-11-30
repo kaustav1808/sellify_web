@@ -1,17 +1,34 @@
 import Modal from '@components/ui/Modal';
-import SelectBox from '@components/ui/SelectBox';
+import SelectBoxRevamp from '@components/ui/SelectBoxRevamp';
 import { NextPage } from 'next';
 import { ScriptProps } from 'next/script';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DefaultItem, Item } from '@customtypes/business/Item';
 import client from 'src/api/client';
 import { toast } from 'react-toastify';
 import { ItemConstants } from 'src/constants/ItemConstants';
+import { ResponseCode } from 'src/constants/ResponseCode';
 
-type ItemModalType = ScriptProps & { show: Boolean; reset: Function };
+type ItemModalType = ScriptProps & {
+  show: Boolean;
+  reset: Function;
+  item?: null | Item;
+  onUpdate?: Function;
+};
 
-const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
+const ItemOperation: NextPage<ItemModalType> = ({
+  show = false,
+  reset,
+  item,
+  onUpdate,
+}) => {
   const [state, setState] = useState<Item>(DefaultItem);
+
+  useEffect(() => {
+    if (item) {
+      setState(item);
+    }
+  }, [item]);
 
   const updateState = (obj: any) => {
     let curr = state;
@@ -19,7 +36,7 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
   };
 
   let resetItem = (set: boolean = true) => {
-    updateState(DefaultItem);
+    updateState(item || DefaultItem);
     reset(set);
   };
 
@@ -55,6 +72,37 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
       resetItem(false);
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  let updateItem = async () => {
+    try {
+      let params: any = {};
+
+      params['title'] = state.title;
+      params['description'] = state.description;
+      params['shortDescription'] = state.shortDescription;
+      params['minPrice'] = state.minPrice;
+      params['maxPrice'] = state.maxPrice;
+      params['sellType'] = state.sellType;
+      if (state.sellType === ItemConstants.AUCTION)
+        params['priceOffset'] = state.priceOffset;
+      params['tags'] = state.tags;
+
+      const res = await client.put('/items/'.concat(state.id || ''), params);
+      toast.success('Item updated Successfully');
+      console.log(res);
+      if (onUpdate) {
+        onUpdate(res.data);
+      }
+
+      resetItem(false);
+    } catch (e: any) {
+      if (e.response.data.code === ResponseCode.SLFY_VALIDATION_ERROR) {
+        e.response.data.errors.forEach((element: { message: string }) => {
+          toast.error(element.message);
+        });
+      }
     }
   };
 
@@ -113,7 +161,9 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
   return (
     <Modal show={show} resetModal={() => resetItem(false)} width="2xl">
       <>
-        <label className="text-2xl">Create an Item</label>
+        <label className="text-2xl">
+          {item && item?.id ? 'Update '.concat(item.title) : 'Create an Item'}
+        </label>
         <div className="divider"></div>
 
         <div className="flex flex-col gap-2">
@@ -161,13 +211,9 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
             <label className="label">
               <span className="label-text text-lg">Tags</span>
             </label>
-            <SelectBox
-              options={[
-                { id: 1, name: 'book', label: 'Book' },
-                { id: 2, name: 'wooden chair', label: 'Wooden Chair' },
-                { id: 3, name: 'macbook', label: 'Macbook' },
-              ]}
-              value="name"
+            <SelectBoxRevamp
+              options={['Book', 'Wooden Chair', 'Macbook']}
+              selected={state.tags}
               multiple={true}
               onInputChange={(val: Array<number | string>) =>
                 selectedItem(val, 'tags')
@@ -179,12 +225,9 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
             <label className="label">
               <span className="label-text text-lg">Sell Type</span>
             </label>
-            <SelectBox
-              options={[
-                { id: 1, name: ItemConstants.RANGE, label: 'Price range' },
-                { id: 2, name: ItemConstants.AUCTION, label: 'Auction' },
-              ]}
-              value="name"
+            <SelectBoxRevamp
+              options={[ItemConstants.RANGE, ItemConstants.AUCTION]}
+              selected={state.sellType}
               onInputChange={(val: Array<number | string>) =>
                 selectedItem(val, 'sellType')
               }
@@ -205,9 +248,16 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
             <button className="btn btn-error" onClick={() => resetItem(false)}>
               CANCEL
             </button>
-            <button className="btn btn-success" onClick={saveItem}>
-              SAVE
-            </button>
+
+            {item && item.id ? (
+              <button className="btn btn-primary" onClick={updateItem}>
+                UPDATE
+              </button>
+            ) : (
+              <button className="btn btn-success" onClick={saveItem}>
+                SAVE
+              </button>
+            )}
           </div>
         </div>
       </>
@@ -215,4 +265,4 @@ const CreateItem: NextPage<ItemModalType> = ({ show = false, reset }) => {
   );
 };
 
-export default CreateItem;
+export default ItemOperation;

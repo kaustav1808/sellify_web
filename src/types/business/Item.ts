@@ -1,3 +1,5 @@
+import { ShortUser } from './User';
+
 export type Item = {
   id?: string;
   title: string;
@@ -16,6 +18,7 @@ export type Item = {
   status: string;
   created_at: Date;
   updated_at: Date;
+  owner?: ShortUser;
 };
 
 export const DefaultItem = {

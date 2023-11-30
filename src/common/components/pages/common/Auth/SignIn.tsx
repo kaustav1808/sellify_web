@@ -1,3 +1,4 @@
+import PasswordInput from '@components/ui/PasswordInput';
 import { signIn } from '@store/actions/auth';
 import { NextPage } from 'next';
 import { useState } from 'react';
@@ -28,18 +29,8 @@ const SignIn: NextPage = ({ signIn }: any) => {
               className="input input-bordered"
             />
           </div>
+          <PasswordInput value={user.password} onValueChange={updateUser} />
           <div className="form-control">
-            <label className="label">
-              <span className="label-text">Password</span>
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="password"
-              value={user.password}
-              onChange={updateUser}
-              className="input input-bordered"
-            />
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
                 Forgot password?

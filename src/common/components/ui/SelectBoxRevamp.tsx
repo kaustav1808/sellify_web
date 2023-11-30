@@ -1,45 +1,36 @@
+import { OptionType, SelectType, StateType } from '@customtypes/ui/SelectBox';
 import { NextPage } from 'next';
-import { ScriptProps } from 'next/script';
-import { useState } from 'react';
+import { Key, useEffect, useState } from 'react';
 
-type DefaultOptionType = {
-  id: number;
-  label: string;
-  name: string;
-};
-
-type DefaultStateType = {
-  value: number | string;
-  label: string;
-  unique: number | string;
-};
-
-type StateType = {
-  selected: DefaultStateType[];
-  opened: boolean;
-};
-
-type SelectType = ScriptProps & {
-  options: DefaultOptionType[] | any[];
-  multiple?: Boolean;
-  label?: string;
-  unique?: string;
-  value?: string | number | undefined;
-  onInputChange: Function;
-};
-
-const SelectBox: NextPage<SelectType> = ({
+const SelectBoxRevamp: NextPage<SelectType> = ({
   options,
   multiple = false,
   onInputChange,
   unique = 'id',
-  label = 'label',
-  value = 'name',
+  label = 'name',
+  selected = [],
 }: SelectType) => {
   const [state, setState] = useState<StateType>({
     selected: [],
     opened: false,
   });
+
+  useEffect(() => {
+    if (selected) {
+      let updatedSelec = Array.isArray(selected)
+        ? selected.map((o: any) => ({
+            label: typeof o === 'object' ? o[unique] : o,
+            unique: typeof o === 'object' ? o[label] : o,
+          }))
+        : [{ label: selected, unique: selected }];
+      updateState({ selected: updatedSelec });
+    }
+  }, [selected]);
+
+  let tranOpt: OptionType[] = options.map((o: any) => ({
+    label: typeof o === 'object' ? o[unique] : o,
+    unique: typeof o === 'object' ? o[label] : o,
+  }));
 
   const updateState = (obj: any) => {
     const curr = state;
@@ -54,14 +45,11 @@ const SelectBox: NextPage<SelectType> = ({
 
     let curr = state.selected;
     let newObj = {
-      value,
       label,
       unique,
     };
 
-    let checkIfExists = curr.filter(
-      (o: DefaultStateType) => o.unique == unique,
-    ).length;
+    let checkIfExists = curr.filter((o: any) => o.unique == unique).length;
 
     if (checkIfExists) {
       returnSelected(curr);
@@ -78,24 +66,26 @@ const SelectBox: NextPage<SelectType> = ({
     updateState({ selected: curr, opened: false });
   };
 
-  const returnSelected = (arr: DefaultStateType[]) => {
-    const selectedValues = arr.map((o) => o.value);
+  const returnSelected = (arr: any) => {
+    const selectedValues = arr.map((o: OptionType) => o.unique);
     onInputChange(selectedValues);
   };
 
-  const removeItem = (e: any, key: number | string) => {
+  const removeItem = (e: any, key: Key | null | undefined) => {
     e.stopPropagation();
     let curr = state.selected;
-    curr = curr.filter((o) => key !== o.unique);
+    curr = curr.filter(
+      (o: { unique: Key | null | undefined }) => key !== o.unique,
+    );
     returnSelected(curr);
     updateState({ selected: curr });
   };
 
   const muilipleLabel = () => {
     if (!state.selected.length) return <div>Select An Option</div>;
-    return state.selected.map((o) => (
+    return state.selected.map((o: any) => (
       <div
-        key={o.value}
+        key={o.unique}
         className="badge badge-success gap-2"
         onClick={(e) => removeItem(e, o.unique)}
       >
@@ -126,14 +116,9 @@ const SelectBox: NextPage<SelectType> = ({
         <li className="menu-title">
           <label>Select An Option</label>
         </li>
-        {options.map((o: any) => (
-          <li
-            key={unique ? o[unique] : o.id}
-            onClick={(e) => selectOption(e, value ? o[value] : o.value)}
-          >
-            <label id={unique ? o[unique] : o.id}>
-              {label ? o[label] : o.label}{' '}
-            </label>
+        {tranOpt.map((o: any) => (
+          <li key={o.unique} onClick={(e) => selectOption(e, o)}>
+            <label id={o.unique}>{o.label} </label>
           </li>
         ))}
       </ul>
@@ -150,4 +135,4 @@ const SelectBox: NextPage<SelectType> = ({
   );
 };
 
-export default SelectBox;
+export default SelectBoxRevamp;
