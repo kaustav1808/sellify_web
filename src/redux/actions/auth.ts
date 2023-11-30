@@ -45,8 +45,9 @@ export const setAuthUser = () => (dispatch: any) => {
       });
     })
     .catch((e) => {
-      console.log(e);
-      toast.error(e.response.data);
+      let responseContent = e?.response?.statusText || "Error"
+      console.log(responseContent)
+      toast.error(responseContent);
     });
 };
 
