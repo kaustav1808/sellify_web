@@ -1,3 +1,6 @@
+import { ShortUser } from '@customtypes/business/User';
+import { Item } from 'src/types/business/Item';
+
 export const getClass = (obj: any) => {
   let classname = '';
 
@@ -39,4 +42,13 @@ export const getRandomColor = () => {
     'sky',
   ];
   return colorArray[Math.floor(Math.random() * colorArray.length)];
+};
+
+export const checkValidItemUser = (user: ShortUser, item: Item) => {
+  if (!user.id) return false;
+  if (!item.owner) return false;
+
+  if (item.owner.id !== user.id) return false;
+
+  return true;
 };

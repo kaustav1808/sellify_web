@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Main from '@components/layouts/Main';
 import { ReactElement, ReactNode, useState } from 'react';
-import CreateItem from '@components/pages/items/CreateItem';
+import ItemOperation from '@components/pages/items/ItemOperation';
 import Tabs from '@components/ui/Tabs';
 import ItemList from '@components/pages/items/ItemList';
 import { getClass } from 'src/services/helpers';
@@ -43,7 +43,7 @@ const Items: NextPageWithLayout = () => {
             Add Item
           </button>
         </div>
-        <CreateItem show={createItem} reset={setCreateItem} />
+        <ItemOperation show={createItem} reset={setCreateItem} />
       </div>
       <div className="flex">
         <div
