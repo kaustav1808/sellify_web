@@ -7,16 +7,17 @@ import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import ImageGallery from 'react-image-gallery';
 import client from 'src/api/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getRandomColor } from 'src/services/helpers';
+import { checkValidItemUser, getRandomColor } from 'src/services/helpers';
 import { faFilePen, faBoxesPacking } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import ItemOperation from '@components/pages/items/ItemOperation';
+import { connect } from 'react-redux';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-const Item: NextPageWithLayout = () => {
+const Item: NextPageWithLayout = ({ user}: any) => {
   const [item, setItem] = useState<Item>(DefaultItem);
   const [editItem, setEditItem] = useState(false);
   const router = useRouter();
@@ -117,7 +118,8 @@ const Item: NextPageWithLayout = () => {
               <div className="text-4xl text-white text-left underline decoration-1 underline-offset-2 font-sans">
                 {item.title || ''}
               </div>
-              <KebabMenu>
+              {
+                checkValidItemUser(user,item) ? <KebabMenu>
                 <>
                   <li>
                     <a onClick={() => setEditItem(true)}>
@@ -150,7 +152,9 @@ const Item: NextPageWithLayout = () => {
                     </a>
                   </li>
                 </>
-              </KebabMenu>
+              </KebabMenu>: ''
+              }
+              
             </div>
 
             <div className="text-sm text-slate-300 text-left font-sans">
@@ -178,7 +182,7 @@ const Item: NextPageWithLayout = () => {
         </div>
       </div>
 
-      <ItemOperation show={editItem} reset={setEditItem} item={item} />
+      <ItemOperation show={editItem} reset={setEditItem} item={item} onUpdate={(item:Item)=>setItem(item)} />
     </>
   );
 };
@@ -187,4 +191,6 @@ Item.getLayout = function getLayout(page: ReactElement) {
   return <Main>{page}</Main>;
 };
 
-export default Item;
+const mapStateToProps = (state:any) => ({user:state.user})
+
+export default connect(mapStateToProps)(Item);

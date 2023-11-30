@@ -7,17 +7,20 @@ import { DefaultItem, Item } from '@customtypes/business/Item';
 import client from 'src/api/client';
 import { toast } from 'react-toastify';
 import { ItemConstants } from 'src/constants/ItemConstants';
+import { ResponseCode } from 'src/constants/ResponseCode';
 
 type ItemModalType = ScriptProps & {
   show: Boolean;
   reset: Function;
   item?: null | Item;
+  onUpdate?:Function
 };
 
 const ItemOperation: NextPage<ItemModalType> = ({
   show = false,
   reset,
   item,
+  onUpdate,
 }) => {
   const [state, setState] = useState<Item>(DefaultItem);
 
@@ -69,6 +72,37 @@ const ItemOperation: NextPage<ItemModalType> = ({
       resetItem(false);
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  let updateItem = async () => {
+    try {
+      let params: any = {};
+
+      params['title'] = state.title;
+      params['description'] = state.description;
+      params['shortDescription'] = state.shortDescription;
+      params['minPrice'] = state.minPrice;
+      params['maxPrice'] = state.maxPrice;
+      params['sellType'] = state.sellType;
+      if (state.sellType === ItemConstants.AUCTION)
+        params['priceOffset'] = state.priceOffset;
+      params['tags'] = state.tags;
+
+      const res = await client.put('/items/'.concat(state.id || ''), params);
+      toast.success('Item updated Successfully');
+      console.log(res)
+      if(onUpdate) {
+        onUpdate(res.data)
+      }
+
+      resetItem(false);
+    } catch (e:any) {
+      if (e.response.data.code === ResponseCode.SLFY_VALIDATION_ERROR) {
+        e.response.data.errors.forEach((element:{message:string}) => {
+          toast.error(element.message);
+        });
+      }
     }
   };
 
@@ -214,9 +248,15 @@ const ItemOperation: NextPage<ItemModalType> = ({
             <button className="btn btn-error" onClick={() => resetItem(false)}>
               CANCEL
             </button>
+
+            { item && item.id ? 
+            <button className="btn btn-primary" onClick={updateItem}>
+              UPDATE
+            </button> :
             <button className="btn btn-success" onClick={saveItem}>
-              SAVE
-            </button>
+            SAVE
+          </button>
+            }
           </div>
         </div>
       </>
