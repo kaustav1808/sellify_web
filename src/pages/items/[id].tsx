@@ -125,7 +125,7 @@ const Item: NextPageWithLayout = ({ user }: any) => {
                 <KebabMenu>
                   <>
                     <li onClick={() => setEditItem(true)}>
-                      <a >
+                      <a>
                         <FontAwesomeIcon
                           icon={faFilePen}
                           width="20"
@@ -135,7 +135,7 @@ const Item: NextPageWithLayout = ({ user }: any) => {
                       </a>
                     </li>
                     <li>
-                      <a onClick={()=>setShowDelete(true)}>
+                      <a onClick={() => setShowDelete(true)}>
                         <FontAwesomeIcon
                           icon={faTrashCan}
                           width="20"
@@ -144,7 +144,7 @@ const Item: NextPageWithLayout = ({ user }: any) => {
                         Delete Item
                       </a>
                     </li>
-                    <li onClick={()=>setArchive(true)}>
+                    <li onClick={() => setArchive(true)}>
                       <a>
                         <FontAwesomeIcon
                           icon={faBoxesPacking}
@@ -197,18 +197,24 @@ const Item: NextPageWithLayout = ({ user }: any) => {
         show={showDelete}
         message={`Are you sure to remove the item "${item.title}" ?`}
         header={`Removing item ${item.title}`}
-        onSuccess={() => {alert('success'); setShowDelete(false)}}
+        onSuccess={() => {
+          alert('success');
+          setShowDelete(false);
+        }}
         onFailure={() => setShowDelete(false)}
       />
 
       <DialogBox
-            show={showArchive}
-            message={`Are you sure to archive the item "${item.title}" ?`}
-            header={`Archiving item ${item.title}`}
-            onSuccess={() => {alert('success'); setArchive(false)}}
-            onFailure={() => setArchive(false)}
-          />
-        </>
+        show={showArchive}
+        message={`Are you sure to archive the item "${item.title}" ?`}
+        header={`Archiving item ${item.title}`}
+        onSuccess={() => {
+          alert('success');
+          setArchive(false);
+        }}
+        onFailure={() => setArchive(false)}
+      />
+    </>
   );
 };
 
