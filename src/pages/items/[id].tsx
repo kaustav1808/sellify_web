@@ -12,6 +12,7 @@ import { faFilePen, faBoxesPacking } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import ItemOperation from '@components/pages/items/ItemOperation';
 import { connect } from 'react-redux';
+import DialogBox from '@components/ui/DialogBox';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -19,6 +20,8 @@ type NextPageWithLayout = NextPage & {
 
 const Item: NextPageWithLayout = ({ user }: any) => {
   const [item, setItem] = useState<Item>(DefaultItem);
+  const [showDelete, setShowDelete] = useState<boolean>(false);
+  const [showArchive, setArchive] = useState<boolean>(false);
   const [editItem, setEditItem] = useState(false);
   const router = useRouter();
 
@@ -121,8 +124,8 @@ const Item: NextPageWithLayout = ({ user }: any) => {
               {checkValidItemUser(user, item) ? (
                 <KebabMenu>
                   <>
-                    <li>
-                      <a onClick={() => setEditItem(true)}>
+                    <li onClick={() => setEditItem(true)}>
+                      <a>
                         <FontAwesomeIcon
                           icon={faFilePen}
                           width="20"
@@ -132,7 +135,7 @@ const Item: NextPageWithLayout = ({ user }: any) => {
                       </a>
                     </li>
                     <li>
-                      <a>
+                      <a onClick={() => setShowDelete(true)}>
                         <FontAwesomeIcon
                           icon={faTrashCan}
                           width="20"
@@ -141,7 +144,7 @@ const Item: NextPageWithLayout = ({ user }: any) => {
                         Delete Item
                       </a>
                     </li>
-                    <li>
+                    <li onClick={() => setArchive(true)}>
                       <a>
                         <FontAwesomeIcon
                           icon={faBoxesPacking}
@@ -188,6 +191,28 @@ const Item: NextPageWithLayout = ({ user }: any) => {
         reset={setEditItem}
         item={item}
         onUpdate={(item: Item) => setItem(item)}
+      />
+
+      <DialogBox
+        show={showDelete}
+        message={`Are you sure to remove the item "${item.title}" ?`}
+        header={`Removing item ${item.title}`}
+        onSuccess={() => {
+          alert('success');
+          setShowDelete(false);
+        }}
+        onFailure={() => setShowDelete(false)}
+      />
+
+      <DialogBox
+        show={showArchive}
+        message={`Are you sure to archive the item "${item.title}" ?`}
+        header={`Archiving item ${item.title}`}
+        onSuccess={() => {
+          alert('success');
+          setArchive(false);
+        }}
+        onFailure={() => setArchive(false)}
       />
     </>
   );
