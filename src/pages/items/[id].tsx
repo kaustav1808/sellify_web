@@ -8,11 +8,17 @@ import ImageGallery from 'react-image-gallery';
 import client from 'src/api/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { checkValidItemUser, getRandomColor } from 'src/services/helpers';
-import { faFilePen, faBoxesPacking } from '@fortawesome/free-solid-svg-icons';
+import {
+  faFilePen,
+  faBoxesPacking,
+  faBoxArchive,
+} from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import ItemOperation from '@components/pages/items/ItemOperation';
 import { connect } from 'react-redux';
 import DialogBox from '@components/ui/DialogBox';
+import { toast } from 'react-toastify';
+import { ResponseCode } from 'src/constants/ResponseCode';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -35,13 +41,39 @@ const Item: NextPageWithLayout = ({ user }: any) => {
           setItem(response);
           document.title = `Sellify | ${response.title}`;
         })
-        .catch((err) => console.log(err));
+        .catch((e) => {
+          if (e.response.data.code === ResponseCode.SLFY_INVALID_ITEM) {
+            toast.error(e.response.data.message);
+            router.replace('/');
+          }
+        });
     }
 
     return () => {
       document.title = 'Sellify';
     };
   }, [router.query]);
+
+  const deleteItem = () => {
+    client
+      .del(`/items/${item.id}`)
+      .then(() => {
+        toast.success(`Item ${item.title} successfully deleted`);
+        setShowDelete(false);
+        router.replace('/');
+      })
+      .catch((e: any) => toast.error(e.response.data.message));
+  };
+
+  const archiveItem = () => {
+    client
+      .get(`/items/set-archive/${item.id}`)
+      .then(() => {
+        toast.success(`Item ${item.title} successfully archived`);
+        setArchive(false);
+      })
+      .catch((e: any) => toast.error(e.response.data.message));
+  };
 
   const getShortBids = () => {
     return [1, 2, 3, 4].map((o) => {
@@ -121,6 +153,16 @@ const Item: NextPageWithLayout = ({ user }: any) => {
               <div className="text-4xl text-white text-left underline decoration-1 underline-offset-2 font-sans">
                 {item.title || ''}
               </div>
+              {item.isArchive ? (
+                <div
+                  className={`flex gap-2 p-2 rounded items-center bg-[#f59e0b] text-black`}
+                >
+                  <FontAwesomeIcon icon={faBoxArchive} width="20" height="20" />
+                  Archived
+                </div>
+              ) : (
+                ''
+              )}
               {checkValidItemUser(user, item) ? (
                 <KebabMenu>
                   <>
@@ -197,10 +239,7 @@ const Item: NextPageWithLayout = ({ user }: any) => {
         show={showDelete}
         message={`Are you sure to remove the item "${item.title}" ?`}
         header={`Removing item ${item.title}`}
-        onSuccess={() => {
-          alert('success');
-          setShowDelete(false);
-        }}
+        onSuccess={() => deleteItem()}
         onFailure={() => setShowDelete(false)}
       />
 
@@ -208,10 +247,7 @@ const Item: NextPageWithLayout = ({ user }: any) => {
         show={showArchive}
         message={`Are you sure to archive the item "${item.title}" ?`}
         header={`Archiving item ${item.title}`}
-        onSuccess={() => {
-          alert('success');
-          setArchive(false);
-        }}
+        onSuccess={() => archiveItem()}
         onFailure={() => setArchive(false)}
       />
     </>
