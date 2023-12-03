@@ -70,8 +70,14 @@ const ItemOperation: NextPage<ItemModalType> = ({
       await client.post('/items', params);
       toast.success('Item created Successfully');
       resetItem(false);
-    } catch (e) {
-      console.log(e);
+    } catch (e:any) {
+      if (e.response.data.code === ResponseCode.SLFY_VALIDATION_ERROR) {
+        e.response.data.errors.forEach((element: { message: string }) => {
+          toast.error(element.message);
+        });
+      } else {
+        toast.error(e.response.data.message);
+      }
     }
   };
 
@@ -102,6 +108,8 @@ const ItemOperation: NextPage<ItemModalType> = ({
         e.response.data.errors.forEach((element: { message: string }) => {
           toast.error(element.message);
         });
+      } else {
+        toast.error(e.response.data.message);
       }
     }
   };
