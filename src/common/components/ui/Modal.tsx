@@ -1,13 +1,5 @@
+import { ModalType } from '@customtypes/ui/Common';
 import { NextPage } from 'next';
-import { ScriptProps } from 'next/script';
-import { ReactElement } from 'react';
-
-type ModalType = ScriptProps & {
-  show: Boolean;
-  resetModal: Function;
-  children: ReactElement;
-  width?: String;
-};
 
 const Modal: NextPage<ModalType> = (props: ModalType) => {
   return (

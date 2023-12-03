@@ -7,6 +7,7 @@ export type Item = {
   description: string;
   tags: string[];
   sellType: string;
+  isArchive: boolean;
   images: {
     original: string;
     thumbnail: string;
@@ -30,6 +31,7 @@ export const DefaultItem = {
   tags: [],
   images: [],
   sellType: '',
+  isArchive: false,
   minPrice: 0,
   maxPrice: 0,
   priceOffset: 0,
