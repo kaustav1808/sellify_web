@@ -47,7 +47,7 @@ export const getRandomColor = () => {
 export const checkValidItemUser = (user: ShortUser, item: Item) => {
   if (!user.id) return false;
   if (!item.owner) return false;
-  if(item.isArchive) return false;
+  if (item.isArchive) return false;
 
   if (item.owner.id !== user.id) return false;
 

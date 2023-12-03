@@ -8,7 +8,11 @@ import ImageGallery from 'react-image-gallery';
 import client from 'src/api/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { checkValidItemUser, getRandomColor } from 'src/services/helpers';
-import { faFilePen, faBoxesPacking, faBoxArchive } from '@fortawesome/free-solid-svg-icons';
+import {
+  faFilePen,
+  faBoxesPacking,
+  faBoxArchive,
+} from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import ItemOperation from '@components/pages/items/ItemOperation';
 import { connect } from 'react-redux';
@@ -37,10 +41,10 @@ const Item: NextPageWithLayout = ({ user }: any) => {
           setItem(response);
           document.title = `Sellify | ${response.title}`;
         })
-        .catch((e) =>{
+        .catch((e) => {
           if (e.response.data.code === ResponseCode.SLFY_INVALID_ITEM) {
             toast.error(e.response.data.message);
-            router.replace("/")
+            router.replace('/');
           }
         });
     }
@@ -51,23 +55,25 @@ const Item: NextPageWithLayout = ({ user }: any) => {
   }, [router.query]);
 
   const deleteItem = () => {
-    client.del(`/items/${item.id}`)
-    .then(() => {
-      toast.success(`Item ${item.title} successfully deleted`)
-      setShowDelete(false);
-      router.replace('/')
-    })
-    .catch((e:any) => toast.error(e.response.data.message));
-  }
+    client
+      .del(`/items/${item.id}`)
+      .then(() => {
+        toast.success(`Item ${item.title} successfully deleted`);
+        setShowDelete(false);
+        router.replace('/');
+      })
+      .catch((e: any) => toast.error(e.response.data.message));
+  };
 
   const archiveItem = () => {
-    client.get(`/items/set-archive/${item.id}`)
-    .then(() => {
-      toast.success(`Item ${item.title} successfully archived`)
-      setArchive(false);
-    })
-    .catch((e:any) => toast.error(e.response.data.message));
-  }
+    client
+      .get(`/items/set-archive/${item.id}`)
+      .then(() => {
+        toast.success(`Item ${item.title} successfully archived`);
+        setArchive(false);
+      })
+      .catch((e: any) => toast.error(e.response.data.message));
+  };
 
   const getShortBids = () => {
     return [1, 2, 3, 4].map((o) => {
@@ -147,8 +153,16 @@ const Item: NextPageWithLayout = ({ user }: any) => {
               <div className="text-4xl text-white text-left underline decoration-1 underline-offset-2 font-sans">
                 {item.title || ''}
               </div>
-              {item.isArchive?<div className={`flex gap-2 p-2 rounded items-center bg-[#f59e0b] text-black`}><FontAwesomeIcon icon={faBoxArchive} width="20"
-                          height="20" />Archived</div>:''}
+              {item.isArchive ? (
+                <div
+                  className={`flex gap-2 p-2 rounded items-center bg-[#f59e0b] text-black`}
+                >
+                  <FontAwesomeIcon icon={faBoxArchive} width="20" height="20" />
+                  Archived
+                </div>
+              ) : (
+                ''
+              )}
               {checkValidItemUser(user, item) ? (
                 <KebabMenu>
                   <>
