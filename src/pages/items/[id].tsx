@@ -208,7 +208,7 @@ const Item: NextPageWithLayout = ({ user }: any) => {
               {item.shortDescription || ''}
             </div>
             <div className="flex flex-wrap gap-1">
-                <Badges values={item.tags} label='tag' />
+              <Badges values={item.tags} label="tag" />
             </div>
             <div className="text-lg text-slate-100 text-left font-sans">
               {item.description || ''}

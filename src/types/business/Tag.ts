@@ -1,4 +1,4 @@
 export type TagType = {
-    tag:String,
-    colorCode:String
-}
+  tag: String;
+  colorCode: String;
+};

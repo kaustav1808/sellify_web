@@ -2,9 +2,7 @@ import ShowPieceImages from './ShowPieceImages';
 import type { NextPage } from 'next';
 import { Item as ItemT } from '@customtypes/business/Item';
 import { ItemConstants } from '../../../../../constants/ItemConstants';
-import {
-  getShortDescription,
-} from 'src/services/helpers';
+import { getShortDescription } from 'src/services/helpers';
 import Link from 'next/link';
 import { ScriptProps } from 'next/script';
 import Badges from '@components/ui/Badges';
@@ -46,7 +44,7 @@ const Item: NextPage<ItemType> = ({ value }: ItemType) => {
             </p>
           </div>
           <div className="mb-2 flex flex-row h-1/6 gap-2">
-            <Badges values={value.tags} isShort={true} label='tag' />
+            <Badges values={value.tags} isShort={true} label="tag" />
           </div>
         </div>
         <div className="px-6">

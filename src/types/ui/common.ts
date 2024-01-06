@@ -28,7 +28,7 @@ export type DialogBoxType = ScriptProps & {
 };
 
 export type BadgeType = ScriptProps & {
-  label:string,
-  values: any,
-  isShort?:boolean
-}
+  label: string;
+  values: any;
+  isShort?: boolean;
+};
