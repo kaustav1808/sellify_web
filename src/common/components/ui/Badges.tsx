@@ -10,7 +10,8 @@ const Badges: NextPage<BadgeType> = ({
   const badge = (label: string, color: string) => (
     <div
       key={getShortId()}
-      className={`bg-[${color}] text-[${color}] py-2 px-4 rounded-full text-xs font-bold`}
+      className={`text-black py-1 px-4 rounded-full text-xs font-bold`}
+      style={{backgroundColor:color}}
     >
       {label}
     </div>
