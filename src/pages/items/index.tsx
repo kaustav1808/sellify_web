@@ -16,7 +16,7 @@ const Items: NextPageWithLayout = () => {
   const [selectedTab, setSelectedTab] = useState('All');
 
   return (
-    <div className="w-full h-inherit p-4">
+    <div className="w-full h-full p-4">
       <div className="flex">
         <div className="w-7/12">
           <Tabs
@@ -45,12 +45,14 @@ const Items: NextPageWithLayout = () => {
         </div>
         <ItemOperation show={createItem} reset={setCreateItem} />
       </div>
-      <div className="flex">
+      <div className="flex w-full h-full">
         <div
           className={getClass({
             hidden: selectedTab !== 'All',
             flex: selectedTab === 'All',
             'flex-col': true,
+            'w-full':true,
+            'h-full':true
           })}
         >
           <ItemList type="all" />
@@ -60,6 +62,8 @@ const Items: NextPageWithLayout = () => {
             hidden: selectedTab !== 'Settled',
             flex: selectedTab === 'Settled',
             'flex-col': true,
+            'w-full':true,
+            'h-full':true
           })}
         >
           <ItemList type={ItemConstants.SETTLED} />
@@ -69,6 +73,8 @@ const Items: NextPageWithLayout = () => {
             hidden: selectedTab !== 'Open',
             flex: selectedTab === 'Open',
             'flex-col': true,
+            'w-full':true,
+            'h-full':true
           })}
         >
           <ItemList type={ItemConstants.OPEN} />
