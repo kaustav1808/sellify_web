@@ -221,7 +221,7 @@ const ItemOperation: NextPage<ItemModalType> = ({
             </label>
             <SelectBoxRevamp
               options={['Book', 'Wooden Chair', 'Macbook']}
-              selected={state.tags.map(o=>o.tag)}
+              selected={state.tags.map((o) => o.tag)}
               multiple={true}
               onInputChange={(val: Array<number | string>) =>
                 selectedItem(val, 'tags')

@@ -13,47 +13,52 @@ const ItemList: NextPage<ItemModalType> = ({ type = 'all' }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     client
       .get(`/items?type=${type}`)
       .then((res) => {
         setItems(res.data);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((e) => {
         console.log(e);
-        setLoading(false)
+        setLoading(false);
       });
   }, []);
 
   const getItems = () => {
     if (items.length) {
-      return (<div className="p-4 grid grid-cols-4 gap-2 h-auto">
-        {items.map((item) => <Item key={item.id} value={item} />)}
-      </div>);
+      return (
+        <div className="p-4 grid grid-cols-4 gap-2 h-auto">
+          {items.map((item) => (
+            <Item key={item.id} value={item} />
+          ))}
+        </div>
+      );
     }
   };
 
   const getLoader = () => {
     return (
-      <div className='flex bg-cover bg-transparent justify-center place-items-center h-full w-full'>
-      <Rings
-  height="80"
-  width="80"
-  color="#D2CEC9"
-  ariaLabel="rings-loading"
-  wrapperStyle={{}}
-  wrapperClass=""
-  />
-    </div>
-    )
+      <div className="flex bg-cover bg-transparent justify-center place-items-center h-full w-full">
+        <Rings
+          height="80"
+          width="80"
+          color="#D2CEC9"
+          ariaLabel="rings-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
   };
 
   return (
     <>
-       
-      <div className="p-4">{loading ? "Loading items...." :  `${items.length} No of results found`}</div>
-      {loading?getLoader():getItems()}
+      <div className="p-4">
+        {loading ? 'Loading items....' : `${items.length} No of results found`}
+      </div>
+      {loading ? getLoader() : getItems()}
     </>
   );
 };

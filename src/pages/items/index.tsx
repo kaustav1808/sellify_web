@@ -51,8 +51,8 @@ const Items: NextPageWithLayout = () => {
             hidden: selectedTab !== 'All',
             flex: selectedTab === 'All',
             'flex-col': true,
-            'w-full':true,
-            'h-full':true
+            'w-full': true,
+            'h-full': true,
           })}
         >
           <ItemList type="all" />
@@ -62,8 +62,8 @@ const Items: NextPageWithLayout = () => {
             hidden: selectedTab !== 'Settled',
             flex: selectedTab === 'Settled',
             'flex-col': true,
-            'w-full':true,
-            'h-full':true
+            'w-full': true,
+            'h-full': true,
           })}
         >
           <ItemList type={ItemConstants.SETTLED} />
@@ -73,8 +73,8 @@ const Items: NextPageWithLayout = () => {
             hidden: selectedTab !== 'Open',
             flex: selectedTab === 'Open',
             'flex-col': true,
-            'w-full':true,
-            'h-full':true
+            'w-full': true,
+            'h-full': true,
           })}
         >
           <ItemList type={ItemConstants.OPEN} />
