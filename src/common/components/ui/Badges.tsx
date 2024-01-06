@@ -11,7 +11,7 @@ const Badges: NextPage<BadgeType> = ({
     <div
       key={getShortId()}
       className={`text-black py-1 px-4 rounded-full text-xs font-bold`}
-      style={{backgroundColor:color}}
+      style={{ backgroundColor: color }}
     >
       {label}
     </div>
