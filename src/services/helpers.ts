@@ -1,3 +1,4 @@
+import { TagType } from '@customtypes/business/Tag';
 import { ShortUser } from '@customtypes/business/User';
 import { Item } from 'src/types/business/Item';
 
@@ -11,12 +12,12 @@ export const getClass = (obj: any) => {
   return classname;
 };
 
-export const getShortTags = (arr: string[], offset = 4) => {
+export const getShortTags = (arr: Array<TagType>, offset = 4) => {
   if (arr.length > offset) {
     return arr
       .slice(0, offset - 1)
       .map((o) => o)
-      .concat([`+${arr.length - offset} more`]);
+      .concat([{tag:`+${arr.length - offset} more`,colorCode:'#787c82'}]);
   } else {
     return arr.map((o) => o);
   }
@@ -53,3 +54,15 @@ export const checkValidItemUser = (user: ShortUser, item: Item) => {
 
   return true;
 };
+
+export const getShortId = (length=10) => {
+  let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}

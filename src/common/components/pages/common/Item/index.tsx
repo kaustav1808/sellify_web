@@ -3,12 +3,11 @@ import type { NextPage } from 'next';
 import { Item as ItemT } from '@customtypes/business/Item';
 import { ItemConstants } from '../../../../../constants/ItemConstants';
 import {
-  getRandomColor,
   getShortDescription,
-  getShortTags,
 } from 'src/services/helpers';
 import Link from 'next/link';
 import { ScriptProps } from 'next/script';
+import Badges from '@components/ui/Badges';
 
 type ItemType = ScriptProps & { value: ItemT };
 
@@ -47,14 +46,7 @@ const Item: NextPage<ItemType> = ({ value }: ItemType) => {
             </p>
           </div>
           <div className="mb-2 flex flex-row h-1/6 gap-2">
-            {getShortTags(value.tags).map((element) => (
-              <div
-                key={value.id + element}
-                className={`flex badge badge-${getRandomColor()} text-black`}
-              >
-                {element}
-              </div>
-            ))}
+            <Badges values={value.tags} isShort={true} label='tag' />
           </div>
         </div>
         <div className="px-6">

@@ -7,7 +7,7 @@ import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import ImageGallery from 'react-image-gallery';
 import client from 'src/api/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { checkValidItemUser, getRandomColor } from 'src/services/helpers';
+import { checkValidItemUser } from 'src/services/helpers';
 import {
   faFilePen,
   faBoxesPacking,
@@ -19,6 +19,7 @@ import { connect } from 'react-redux';
 import DialogBox from '@components/ui/DialogBox';
 import { toast } from 'react-toastify';
 import { ResponseCode } from 'src/constants/ResponseCode';
+import Badges from '@components/ui/Badges';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -207,16 +208,7 @@ const Item: NextPageWithLayout = ({ user }: any) => {
               {item.shortDescription || ''}
             </div>
             <div className="flex flex-wrap gap-1">
-              {item.tags
-                ? item.tags.map((element) => (
-                    <div
-                      key={item.id + element}
-                      className={`flex badge badge-${getRandomColor()} text-black`}
-                    >
-                      {element}
-                    </div>
-                  ))
-                : ''}
+                <Badges values={item.tags} label='tag' />
             </div>
             <div className="text-lg text-slate-100 text-left font-sans">
               {item.description || ''}

@@ -1,3 +1,4 @@
+import { TagType } from './Tag';
 import { ShortUser } from './User';
 
 export type Item = {
@@ -5,7 +6,7 @@ export type Item = {
   title: string;
   shortDescription: string;
   description: string;
-  tags: string[];
+  tags: TagType[];
   sellType: string;
   isArchive: boolean;
   images: {

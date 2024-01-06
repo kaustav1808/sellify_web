@@ -26,3 +26,9 @@ export type DialogBoxType = ScriptProps & {
   onSuccess: Function;
   onFailure: Function;
 };
+
+export type BadgeType = ScriptProps & {
+  label:string,
+  values: any,
+  isShort?:boolean
+}
